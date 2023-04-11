@@ -1,0 +1,96 @@
+{
+    "nombre": "Alexis Taberna",
+    "profesion": "DevOps / SRE",
+    "correo": "alexiscaspell@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/alexis-taberna-824690147/",
+    "github": "https://github.com/alexiscaspell",
+    "whatsapp": "https://wa.me/00541159042095",
+    "telefono": "+54 1159042095",
+    "techRadar": "http://cv-radar.tostado.theworkpc.com/",
+    "descripcion": "Como persona, tengo experiencia en el ámbito de la tecnología. He trabajado en diferentes roles, desde desarrollador full stack hasta líder de proyecto y DevOps. Me considero un profesional comprometido y dedicado, que se enfoca en planificar y llevar a cabo proyectos en diferentes tecnologías. Me gusta mantener una comunicación fluida con los equipos con los que trabajo, colaborando con ellos para asegurarme de que todo salga bien. Además, soy muy curioso y siempre estoy dispuesto a aprender nuevas herramientas y metodologías para mejorar mi trabajo y mantener actualizado mi conocimiento en tecnología.",
+    "habilidades": [
+        "Habilidad 1",
+        "Habilidad 2",
+        "Habilidad 3"
+    ],
+    "experiencia": [{
+            "puesto": "Fullstack Developer",
+            "empresa": "IT Resources S.A",
+            "fechaInicio": "Marzo 2017",
+            "fechaFin": "Septiembre 2018",
+            "descripcion": "Trabajando en varios equipos como full stack dev desarrollando soluciones punta a punta (frontend,backend y base de datos) principalmente para la aplicación SGI de Swiss Medical y participando en el mantenimiento y desarrollo de nuevas funcionalidades para el middleware productivo (con un stack de Java, Spring,Javascript,Jquery,Bootstrap,Sql Server y Sybase)."
+        },
+        {
+            "puesto": "SW Engineer",
+            "empresa": "LEAFNOISE Company S.A",
+            "fechaInicio": "Septiembre 2018",
+            "fechaFin": "Marzo 2021",
+            "descripcion": "Lider de  proyecto, encargado desde la fase de relevamiento a la división de tareas, planeamiento, desarrollo y  despliegue de nuevos productos en múltiples tecnologías dependiendo de la licitación (principalmente Java con Spring Boot y Python con Flask o Django)."
+        },
+        {
+            "puesto": "DevOps Engineer",
+            "empresa": "Redbee Studios",
+            "fechaInicio": "Marzo 2021",
+            "fechaFin": "Presente",
+            "descripcion": "DevOps, mi función era asegurar la colaboración entre los equipos de desarrollo y operaciones para una implementación eficiente del código en producción. Optimizando los procesos de desarrollo, testing y operaciones, creando e implementando herramientas (mayormente en python y bash), metodologias de trabajo (como gitflow,configuracion centralizada con cloud config, etc) y pipelines (jenkins o gitlab CI). A estas tareas tambien se sumaban las correspondientes a la migracion de onprem a AWS (dar de alta los ambientes con terraform, conversion de pipelines de jenkins a gitlab CI + ArgoCD, creacion de cluster de k8s,etc)"
+        }
+    ],
+    "educacion": [{
+            "titulo": "BACHILLER HUMANIDADES",
+            "institucion": "Nuestra Sra del Lujan",
+            "anio": "2012",
+            "cursos": []
+        },
+        {
+            "titulo": "Univ. Tecnologica Nacional",
+            "institucion": "ING. SISTEMAS DE INFO.",
+            "anio": "Presente",
+            "cursos": []
+        }
+    ],
+    "lenguajes": [{
+            "lenguaje": "Español",
+            "nivel": "Nativo"
+        },
+        {
+            "lenguaje": "Ingles",
+            "nivel": "Intermedio"
+        },
+        {
+            "lenguaje": "Portugues",
+            "nivel": "Basico"
+        }
+    ],
+    "proyectos": [{
+            "nombre": "Savior",
+            "url": "https://github.com/alexiscaspell/savior",
+            "descripcion": "Este proyecto consiste en una rest api la cual se le pueden definir la abstraccion de service, y a este se le asocian reglas, las cuales en caso de cumplirse desencadenan acciones o como el santo salvador las llama \"consecuencias\". La Restapi esta documentada con Fast api."
+        },
+        {
+            "nombre": "Horrocrux",
+            "url": "https://github.com/alexiscaspell/horrocrux",
+            "descripcion": "Inmortaliza tu trabajo o codigo hasta el final de los tiempos. Esta aplicacion permite crear semillas de codigo y definir plugins para poder comenzar proyectos de una forma rapida y estandarizada"
+        },
+        {
+            "nombre": "Build your Own Radar",
+            "url": "https://github.com/alexiscaspell/build-your-own-radar",
+            "descripcion": "Mi propia version de byor, con la posibilidad de usar csvs del disco o usar sheets privadas de google (mas abajo podes verla en accion, esta hosteada en mi cluster privado)"
+        },
+        {
+            "nombre": "Dynu DNS Updater",
+            "url": "https://github.com/alexiscaspell/dynu-dns-updater",
+            "descripcion": "Aplicacion para mantener actualizado tu ip publica en dns dynu (https://www.dynu.com/en-US)"
+        },
+        {
+            "nombre": "Cron Worker",
+            "url": "https://github.com/alexiscaspell/cron-worker",
+            "descripcion": "Permite correr procesos automatizados bajo un cron, enviando alertas con el estado de la ejecucion"
+        },
+        {
+            "nombre": "Mi CV",
+            "url": "https://github.com/alexiscaspell/my-cv",
+            "descripcion": "Este mismo cv que estas viendo."
+        }
+    ],
+    "intereses": ["Cloud", "Automatizacion", "Nuevas tecnologias"]
+}

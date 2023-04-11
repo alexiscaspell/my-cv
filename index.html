@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Mi CV</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mi CV">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,400italic,300italic,300,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS-->
+    <script defer src="assets/fontawesome/js/all.min.js"></script>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Global JS -->
+    <script src="assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/orbit-6.css">
+    <!-- TImeline CSS -->
+    <link rel="stylesheet" href="assets/css/timeline.css">
+
+</head>
+
+<body>
+    <div class="wrapper mt-lg-5">
+        <div class="sidebar-wrapper">
+            <div class="profile-container">
+                <img class="profile" src="assets/images/profile.png" alt="" />
+                <h1 class="name">{{nombre}}</h1>
+                <h3 class="tagline">{{profesion}}</h3>
+            </div>
+
+            <div class="contact-container container-block">
+                <ul class="list-unstyled contact-list">
+                    <li class="email"><i class="fa-solid fa-envelope"></i><a href="mailto: {{correo}}">{{correo}}</a>
+                    </li>
+                    <li class="phone"><i class="fa-solid fa-phone"></i><a href="tel:{{telefono}}">{{telefono}}</a></li>
+                    <!-- <li class="website"><i class="fa-solid fa-globe"></i><a href="https://themes.3rdwavemedia.com/bootstrap-templates/resume/orbit-free-resume-cv-bootstrap-theme-for-developers/" target="_blank">portfoliosite.com</a></li> -->
+                    <li class="linkedin"><i class="fa-brands fa-linkedin-in"></i><a href="{{linkedin}}" target="_blank">{{nombre}}</a></li>
+                    <li class="github"><i class="fa-brands fa-github"></i><a href="{{github}}" target="_blank">{{usuarioGithub}}</a></li>
+                    <li class="whatsapp"><i class="fa-brands fa-whatsapp"></i><a href="{{whatsapp}}" target="_blank">{{telefono}}</a></li>
+                </ul>
+            </div>
+            <div class="education-container container-block">
+                <h2 class="container-block-title">Education</h2>
+                {{#each educacion}}
+                <div class="item">
+                    <h4 class="degree">{{this.titulo}}</h4>
+                    <h5 class="meta">{{this.institucion}}</h5>
+                    <div class="time">{{this.anio}}</div>
+                </div>
+                {{/each}}
+
+            </div>
+
+            <div class="languages-container container-block">
+                <h2 class="container-block-title">Languages</h2>
+                <ul class="list-unstyled interests-list">
+                    {{#each lenguajes}}
+                    <li>{{this.lenguaje}} <span class="lang-desc">({{this.nivel}})</span></li>
+                    {{/each}}
+                </ul>
+            </div>
+
+            <div class="interests-container container-block">
+                <h2 class="container-block-title">Interests</h2>
+                <ul class="list-unstyled interests-list">
+                    {{#each intereses}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="main-wrapper">
+
+            <section class="section summary-section">
+                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-user"></i></span>Career Profile
+                </h2>
+                <div class="summary">
+                    <p>{{descripcion}}</p>
+                </div>
+            </section>
+
+            <section class="section experiences-section">
+                <h2 class="section-title"><span class="icon-holder"><i
+                            class="fa-solid fa-briefcase"></i></span>Experiences</h2>
+
+                {{{experienciaHtml}}}
+
+            </section>
+
+            <section class="section projects-section">
+                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-archive"></i></span>Some of my projects
+                </h2>
+                <div class="intro">
+                    <p>En mi tiempo libre desarrollo algunas herramientas para solucionar problematicas comunes en el mundo de sistemas, aca hay algunos ejemplos:
+                    </p>
+                </div>
+                {{#each proyectos}}
+                <div class="item">
+                    <span class="project-title"><a href="{{this.url}}" target="_blank">{{this.nombre}}</a></span> -
+                    <span class="project-tagline">{{this.descripcion}}</span>
+                </div>
+                {{/each}}
+            </section>
+
+            <section class="skills-section section">
+                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>Skills &amp; Proficiency</h2>
+                <div class="intro">
+                    <p>Podes encontrar un resumen de mis skills en mi tech radar:
+                    </p>
+                </div>
+                <div class="skillset">
+                    {{{habilidadesHtml}}}
+                    <!-- <div class="item">
+                        <h3 class="level-title">Python &amp; Django</h3>
+                        <div class="progress level-bar">
+                            <div class="progress-bar theme-progress-bar" role="progressbar" style="width: 99%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div> -->
+
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+    </footer>
+
+</body>
+
+</html>
