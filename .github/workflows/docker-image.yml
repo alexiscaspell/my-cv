@@ -12,4 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
+      env:
+        DOCKER_HUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        DOCKER_HUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_HUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
       run: chmod +x ./scripts/build_and_push.sh && ./scripts/build_and_push.sh

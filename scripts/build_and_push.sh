@@ -3,6 +3,8 @@ tag=${1:-latest}
 
 docker run --privileged --rm tonistiigi/binfmt --install all
 
+echo "$DOCKER_HUB_TOKEN" | docker login --username $DOCKERHUB_USERNAME --password-stdin $DOCKER_HUB_REPO
+
 docker buildx rm mybuild || true
 docker buildx create --use --name mybuild default || true
 
