@@ -1,6 +1,8 @@
 
 tag=${1:-latest}
 
+docker login --username=$DOCKER_HUB_USER --password=$DOCKER_HUB_TOKEN
+
 docker run --privileged --rm tonistiigi/binfmt --install all
 
 # echo "$DOCKER_HUB_TOKEN" | docker login --username $DOCKERHUB_USERNAME --password-stdin $DOCKER_HUB_REPO
