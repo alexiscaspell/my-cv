@@ -1,0 +1,102 @@
+{
+    "nombre": "Alexis Taberna",
+    "profesion": "DevOps / SRE",
+    "correo": "alexiscaspell@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/alexis-taberna-824690147/",
+    "github": "https://github.com/alexiscaspell",
+    "whatsapp": "https://wa.me/00541159042095",
+    "telefono": "+54 1159042095",
+    "techRadar": "http://cv-radar.toast.com.ar/",
+    "techRadarTitulo": "My Tech Radar",
+    "descargarCVTitulo": "Download CV as PDF",
+    "proyectosDescripcion": "In my free time, I develop some tools to solve common problems in the systems world, here are some examples:",
+    "habilidadesDescripcion": "You can find a summary of my skills in my tech radar:",
+    "descripcion": "As a professional, I have worked in various roles, from full-stack developer to project leader and DevOps. I consider myself a committed and dedicated professional focused on planning and executing projects in different technologies. I enjoy maintaining smooth communication with the teams I work with, collaborating to ensure everything goes well. Additionally, I am very curious and always willing to learn new tools and methodologies to improve my work and keep my technology knowledge up-to-date.",
+    "experiencia": [{
+            "puesto": "Fullstack Developer",
+            "empresa": "IT Resources S.A",
+            "fechaInicio": "March 2017",
+            "fechaFin": "September 2018",
+            "descripcion": "Working in several teams as a full-stack developer, developing end-to-end solutions (frontend, backend, and database), primarily for the SGI application of Swiss Medical, and participating in maintaining and developing new features for the production middleware (using a stack of Java, Spring, JavaScript, Jquery, Bootstrap, SQL Server, and Sybase)."
+        },
+        {
+            "puesto": "SW Engineer",
+            "empresa": "LEAFNOISE Company S.A",
+            "fechaInicio": "September 2018",
+            "fechaFin": "March 2021",
+            "descripcion": "Project leader, responsible from the requirements gathering phase to task division, planning, development, and deployment of new products in multiple technologies depending on the project (mainly Java with Spring Boot and Python with Flask or Django)."
+        },
+        {
+            "puesto": "DevOps Engineer",
+            "empresa": "Redbee Studios",
+            "fechaInicio": "March 2021",
+            "fechaFin": "Present",
+            "descripcion": "DevOps, my role was to ensure collaboration between development and operations teams for efficient code deployment in production. Optimizing development, testing, and operations processes, creating and implementing tools (mostly in Python and Bash), workflows (like Gitflow, centralized configuration with Cloud Config, etc.), and pipelines (Jenkins or GitLab CI). These tasks also included migrating from on-premises to AWS (setting up environments with Terraform, converting Jenkins pipelines to GitLab CI + ArgoCD, creating Kubernetes clusters, etc.)."
+        },
+        {
+            "puesto": "Cloud Engineer",
+            "empresa": "Teracloud",
+            "fechaInicio": "September 2023",
+            "fechaFin": "Present",
+            "descripcion": "Participating in all kinds of projects with AWS and Azure, from infrastructure creation to implementing CI/CD pipelines, serverless services creation, etc."
+        }
+    ],
+    "educacion": [{
+            "titulo": "High School Diploma in Humanities",
+            "institucion": "Nuestra Sra del Lujan",
+            "anio": "2012",
+            "cursos": []
+        },
+        {
+            "titulo": "Information Systems Engineering",
+            "institucion": "Univ. Tecnologica Nacional",
+            "anio": "Present",
+            "cursos": []
+        }
+    ],
+    "lenguajes": [{
+            "lenguaje": "Spanish",
+            "nivel": "Native"
+        },
+        {
+            "lenguaje": "English",
+            "nivel": "Intermediate"
+        },
+        {
+            "lenguaje": "Portuguese",
+            "nivel": "Basic"
+        }
+    ],
+    "proyectos": [{
+            "nombre": "Savior",
+            "url": "https://github.com/alexiscaspell/savior",
+            "descripcion": "This project consists of a REST API where you can define a service abstraction and associate rules that trigger actions if met, or as the holy savior calls them, \"consequences.\" The REST API is documented with FastAPI."
+        },
+        {
+            "nombre": "Horrocrux",
+            "url": "https://github.com/alexiscaspell/horrocrux",
+            "descripcion": "Immortalize your work or code until the end of time. This application allows you to create code seeds and define plugins to start projects quickly and in a standardized way."
+        },
+        {
+            "nombre": "Build your Own Radar",
+            "url": "https://github.com/alexiscaspell/build-your-own-radar",
+            "descripcion": "My own version of BYOR, with the ability to use local CSV files or private Google Sheets (you can see it in action below, hosted on my private cluster)."
+        },
+        {
+            "nombre": "Dynu DNS Updater",
+            "url": "https://github.com/alexiscaspell/dynu-dns-updater",
+            "descripcion": "Application to keep your public IP updated on Dynu DNS (https://www.dynu.com/en-US)."
+        },
+        {
+            "nombre": "Cron Worker",
+            "url": "https://github.com/alexiscaspell/cron-worker",
+            "descripcion": "Allows running automated processes under a cron, sending alerts with the execution status."
+        },
+        {
+            "nombre": "My CV",
+            "url": "https://github.com/alexiscaspell/my-cv",
+            "descripcion": "This same CV you are viewing."
+        }
+    ],
+    "intereses": ["Cloud", "Automation", "New Technologies"]
+}

@@ -1,6 +1,7 @@
 const express = require('express');
 const handlebars = require('express-handlebars').create();
-const datos = require('./assets/data/datos.json');
+const datosEs = require('./assets/data/datos.es.json');
+const datosEn = require('./assets/data/datos.en.json');
 
 
 const app = express();
@@ -10,6 +11,10 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 // Ruta principal
 app.get('/', (req, res) => {
+
+    const lang = req.url.includes("lang=") ? req.url.split("lang=")[1].split("&")[0] : 'es';
+
+    let datos = lang=="es" ? datosEs : datosEn;
 
     let experiencia = datos["experiencia"] ?? [];
 
@@ -31,6 +36,7 @@ app.get('/', (req, res) => {
     })
 
 });
+
 
 // Iniciar el servidor
 app.listen(3000, () => {

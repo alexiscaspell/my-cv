@@ -30,10 +30,136 @@
     <!-- TImeline CSS -->
     <link rel="stylesheet" href="assets/css/timeline.css">
 
+    <!-- Custom Styles -->
+
+    <style>
+        /* Dark theme adjustments */
+        body,
+        .main-wrapper,
+        .section {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        /* Download CV button*/
+        #downloadCvButton {
+            margin: 20px auto;
+            display: block;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #downloadCvButton:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Language switch container */
+        .language-switch {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hide the checkbox */
+        .language-checkbox {
+            display: none;
+        }
+
+        /* Switch label */
+        .language-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80px;
+            /* Smaller width */
+            height: 30px;
+            /* Smaller height */
+            background-color: #007bff;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hover effect */
+        .language-label:hover {
+            background-color: #0056b3;
+        }
+
+        /* Text inside the switch */
+        .language-label-text {
+            color: #fff;
+            font-size: 12px;
+            /* Smaller font size */
+            font-weight: 500;
+            padding: 0 5px;
+            /* Adjust padding */
+            z-index: 2;
+            user-select: none;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        /* Toggle circle inside the switch */
+        .language-label::after {
+            content: '';
+            width: 28px;
+            /* Smaller circle */
+            height: 28px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 1px;
+            /* Center vertically */
+            left: 1px;
+            /* Default position */
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Toggle checked styles */
+        .language-checkbox:checked+.language-label::after {
+            transform: translateX(50px);
+            /* Adjust for smaller size */
+        }
+
+        .language-checkbox:checked+.language-label {
+            background-color: #28a745;
+        }
+
+        .language-checkbox:checked+.language-label:hover {
+            background-color: #218838;
+        }
+    </style>
+
 </head>
 
 <body>
-    <button id="downloadCvButton">Descargar CV a PDF</button>
+    <!-- Button with custom styles -->
+    <button id="downloadCvButton" class="btn btn-primary btn-lg">
+        <i class="fa-solid fa-download"></i> {{descargarCVTitulo}}
+    </button>
+    <!-- Language switch -->
+    <!-- <div class="language-switcher">
+        <button class="lang-button" onclick="changeLanguage('es')">Español</button>
+        <button class="lang-button" onclick="changeLanguage('en')">English</button>
+    </div> -->
+
+    <!-- Language switch -->
+    <div class="language-switch">
+        <input type="checkbox" id="languageToggle" class="language-checkbox">
+        <label for="languageToggle" class="language-label">
+            <span class="language-label-text">Español</span>
+            <span class="language-label-text">English</span>
+        </label>
+    </div>
+
+
+
     <div id="cvBody" class="wrapper mt-lg-5">
         <div class="sidebar-wrapper">
             <div class="profile-container">
@@ -112,8 +238,7 @@
                     projects
                 </h2>
                 <div class="intro">
-                    <p>En mi tiempo libre desarrollo algunas herramientas para solucionar problematicas comunes en el
-                        mundo de sistemas, aca hay algunos ejemplos:
+                    <p>{{proyectosDescripcion}}
                     </p>
                 </div>
                 {{#each proyectos}}
@@ -128,18 +253,11 @@
                 <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>Skills
                     &amp; Proficiency</h2>
                 <div class="intro">
-                    <p>Podes encontrar un resumen de mis skills en mi tech radar:
+                    <p>{{habilidadesDescripcion}}
                     </p>
                 </div>
                 <div class="skillset">
                     {{{habilidadesHtml}}}
-                    <!-- <div class="item">
-                        <h3 class="level-title">Python &amp; Django</h3>
-                        <div class="progress level-bar">
-                            <div class="progress-bar theme-progress-bar" role="progressbar" style="width: 99%" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div> -->
-
                 </div>
             </section>
 
@@ -151,7 +269,9 @@
     <footer class="footer">
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const btn = document.getElementById("downloadCvButton");
 
@@ -159,6 +279,34 @@
             var element = document.getElementById('cvBody');
             html2pdf().from(element).save('cv-alexis-taberna.pdf');
         });
+    </script>
+
+    <script>
+        function changeLanguage(lang) {
+            if(window.location.href.includes('?lang='+lang)) {
+                return;
+            }
+            window.location.href = '?lang=' + lang;
+        }
+        document.getElementById('languageToggle').addEventListener('change', function () {
+            const lang = this.checked ? 'en' : 'es';
+            changeLanguage(lang);
+        });
+
+    </script>
+    <script>
+        // Detect the 'lang' query parameter
+        window.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get("lang");
+            const languageToggle = document.getElementById("languageToggle");
+
+            // Check the toggle if 'lang=en'
+            if (lang === "en" && languageToggle.checked === false) {
+                languageToggle.checked = true;
+            }
+        });
+
     </script>
 
 </body>

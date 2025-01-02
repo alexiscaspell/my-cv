@@ -6,7 +6,11 @@
     "github": "https://github.com/alexiscaspell",
     "whatsapp": "https://wa.me/00541159042095",
     "telefono": "+54 1159042095",
-    "techRadar": "http://cv-radar.tostado.theworkpc.com/",
+    "techRadar": "http://cv-radar.toast.com.ar/",
+    "techRadarTitulo": "Mi Radar Tecnológico",
+    "descargarCVTitulo": "Descargar CV a PDF",
+    "proyectosDescripcion": "En mi tiempo libre desarrollo algunas herramientas para solucionar problematicas comunes en el mundo de sistemas, aca hay algunos ejemplos:",
+    "habilidadesDescripcion": "Podes encontrar un resumen de mis skills en mi tech radar:",
     "descripcion": "Como persona he trabajado en diferentes roles, desde desarrollador full stack hasta líder de proyecto y DevOps. Me considero un profesional comprometido y dedicado, que se enfoca en planificar y llevar a cabo proyectos en diferentes tecnologías. Me gusta mantener una comunicación fluida con los equipos con los que trabajo, colaborando con ellos para asegurarme de que todo salga bien. Además, soy muy curioso y siempre estoy dispuesto a aprender nuevas herramientas y metodologías para mejorar mi trabajo y mantener actualizado mi conocimiento en tecnología.",
     "experiencia": [{
             "puesto": "Fullstack Developer",
@@ -28,6 +32,13 @@
             "fechaInicio": "Marzo 2021",
             "fechaFin": "Presente",
             "descripcion": "DevOps, mi función era asegurar la colaboración entre los equipos de desarrollo y operaciones para una implementación eficiente del código en producción. Optimizando los procesos de desarrollo, testing y operaciones, creando e implementando herramientas (mayormente en python y bash), metodologias de trabajo (como gitflow,configuracion centralizada con cloud config, etc) y pipelines (jenkins o gitlab CI). A estas tareas tambien se sumaban las correspondientes a la migracion de onprem a AWS (dar de alta los ambientes con terraform, conversion de pipelines de jenkins a gitlab CI + ArgoCD, creacion de cluster de k8s,etc)"
+        },
+        {
+            "puesto": "Cloud Engineer",
+            "empresa": "Teracloud",
+            "fechaInicio": "Septiembre 2023",
+            "fechaFin": "Presente",
+            "descripcion": "Participando en proyectos de todo tipo con AWS y Azure, desde la creacion de la infraestructura hasta la implementacion de pipelines de CI/CD, pasando por la creacion de servicios serverless, etc."
         }
     ],
     "educacion": [{

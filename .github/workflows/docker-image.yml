@@ -17,3 +17,20 @@ jobs:
         DOCKER_HUB_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKER_HUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
       run: chmod +x ./scripts/build_and_push.sh && ./scripts/build_and_push.sh
+
+    # - name: Deploy to ArgoCD
+    #   env:
+    #     GITOPS_REPOSITORY: ${{ secrets.GITOPS_REPOSITORY }}
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     NEW_IMAGE_TAG: ${{ github.sha }}
+    #   run: chmod +x ./scripts/deploy_argocd.sh && ./scripts/deploy_argocd.sh
+
+    # - name: Sync ArgoCD Application
+    #   uses: omegion/argocd-actions@v1
+    #   with:
+    #     address: ${{ secrets.ARGOCD_SERVER }}
+    #     token: ${{ secrets.ARGOCD_TOKEN }}
+    #     action: sync
+    #     appName: applications
+
+

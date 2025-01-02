@@ -1,0 +1,7 @@
+services:
+  my-cv:
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
