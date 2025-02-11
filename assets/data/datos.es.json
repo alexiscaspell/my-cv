@@ -6,11 +6,9 @@
     "github": "https://github.com/alexiscaspell",
     "whatsapp": "https://wa.me/00541159042095",
     "telefono": "+54 1159042095",
-    "techRadar": "http://cv-radar.toast.com.ar/",
-    "techRadarTitulo": "Mi Radar Tecnológico",
     "descargarCVTitulo": "Descargar CV a PDF",
     "proyectosDescripcion": "En mi tiempo libre desarrollo algunas herramientas para solucionar problematicas comunes en el mundo de sistemas, aca hay algunos ejemplos:",
-    "habilidadesDescripcion": "Podes encontrar un resumen de mis skills en mi tech radar:",
+    "habilidadesDescripcion": "Un resumen de mis habilidades técnicas:",
     "descripcion": "Como persona he trabajado en diferentes roles, desde desarrollador full stack hasta líder de proyecto y DevOps. Me considero un profesional comprometido y dedicado, que se enfoca en planificar y llevar a cabo proyectos en diferentes tecnologías. Me gusta mantener una comunicación fluida con los equipos con los que trabajo, colaborando con ellos para asegurarme de que todo salga bien. Además, soy muy curioso y siempre estoy dispuesto a aprender nuevas herramientas y metodologías para mejorar mi trabajo y mantener actualizado mi conocimiento en tecnología.",
     "experiencia": [{
             "puesto": "Fullstack Developer",
@@ -80,12 +78,12 @@
         {
             "nombre": "Build your Own Radar",
             "url": "https://github.com/alexiscaspell/build-your-own-radar",
-            "descripcion": "Mi propia version de byor, con la posibilidad de usar csvs del disco o usar sheets privadas de google (mas abajo podes verla en accion, esta hosteada en mi cluster privado)"
+            "descripcion": "Mi propia version de byor, con la posibilidad de usar csvs del disco o usar sheets privadas de google (podés ver una demo <a href='https://cv-radar.toast.com.ar'>aquí</a>)."
         },
         {
             "nombre": "Dynu DNS Updater",
             "url": "https://github.com/alexiscaspell/dynu-dns-updater",
-            "descripcion": "Aplicacion para mantener actualizado tu ip publica en dns dynu (https://www.dynu.com/en-US)"
+            "descripcion": "Aplicacion para mantener actualizado tu ip publica en <a href='https://www.dynu.com/en-US'>Dynu DNS</a>."
         },
         {
             "nombre": "Cron Worker",
@@ -95,8 +93,22 @@
         {
             "nombre": "Mi CV",
             "url": "https://github.com/alexiscaspell/my-cv",
-            "descripcion": "Este mismo cv que estas viendo."
+            "descripcion": "Este mismo cv <a href='https://cv.toast.com.ar'>que estas viendo</a>."
         }
     ],
-    "intereses": ["Cloud", "Automatizacion", "Nuevas tecnologias"]
+    "intereses": ["Cloud", "Automatizacion", "Nuevas tecnologias"],
+    "certificaciones": [
+        {
+            "nombre": "AWS Certified Cloud Practitioner",
+            "emisor": "Servicios Web de Amazon",
+            "badge": "assets/images/badges/aws-cp.png",
+            "url": "https://www.credly.com/badges/c4d7d48c-b8a3-4182-b817-21f751293b98/public_url"
+        },
+        {
+            "nombre": "AWS Certified Solutions Architect",
+            "emisor": "Servicios Web de Amazon",
+            "badge": "assets/images/badges/aws-sa.png",
+            "url": "https://www.credly.com/badges/07e0e6f1-874d-4ffa-bc0b-ec4b4b41296a/public_url"
+        }
+    ]
 }

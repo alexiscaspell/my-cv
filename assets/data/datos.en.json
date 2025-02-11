@@ -80,12 +80,12 @@
         {
             "nombre": "Build your Own Radar",
             "url": "https://github.com/alexiscaspell/build-your-own-radar",
-            "descripcion": "My own version of BYOR, with the ability to use local CSV files or private Google Sheets (you can see it in action below, hosted on my private cluster)."
+            "descripcion": "My own version of BYOR, with the ability to use local CSV files or private Google Sheets (you can see an example <a href='https://cv-radar.toast.com.ar'>here</a>)."
         },
         {
             "nombre": "Dynu DNS Updater",
             "url": "https://github.com/alexiscaspell/dynu-dns-updater",
-            "descripcion": "Application to keep your public IP updated on Dynu DNS (https://www.dynu.com/en-US)."
+            "descripcion": "Application to keep your public IP updated on <a href='https://www.dynu.com/en-US'>Dynu DNS</a>."
         },
         {
             "nombre": "Cron Worker",
@@ -95,8 +95,22 @@
         {
             "nombre": "My CV",
             "url": "https://github.com/alexiscaspell/my-cv",
-            "descripcion": "This same CV you are viewing."
+            "descripcion": "This same CV you <a href='https://cv.toast.com.ar'>are viewing</a>."
         }
     ],
-    "intereses": ["Cloud", "Automation", "New Technologies"]
+    "intereses": ["Cloud", "Automation", "New Technologies"],
+    "certificaciones": [
+        {
+            "nombre": "AWS Certified Cloud Practitioner",
+            "emisor": "Amazon Web Services",
+            "badge": "assets/images/badges/aws-cp.png",
+            "url": "https://www.credly.com/badges/c4d7d48c-b8a3-4182-b817-21f751293b98/public_url"
+        },
+        {
+            "nombre": "AWS Certified Solutions Architect",
+            "emisor": "Amazon Web Services",
+            "badge": "assets/images/badges/aws-sa.png",
+            "url": "https://www.credly.com/badges/07e0e6f1-874d-4ffa-bc0b-ec4b4b41296a/public_url"
+        }
+    ]
 }

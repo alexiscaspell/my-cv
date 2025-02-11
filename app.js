@@ -27,11 +27,8 @@ app.get('/', (req, res) => {
 
     handlebars.render("timeline.html", datos).then((experienceHtml) => {
         datos["experienciaHtml"] = experienceHtml
-        handlebars.render("skills.html", datos).then((habilidadesHtml) => {
-            datos["habilidadesHtml"] = habilidadesHtml
-            handlebars.render("index.html", datos).then((renderedHtml) => {
-                res.send(renderedHtml)
-            })
+        handlebars.render("index.html", datos).then((renderedHtml) => {
+            res.send(renderedHtml)
         })
     })
 

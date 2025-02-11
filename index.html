@@ -232,6 +232,49 @@
                 page-break-inside: avoid !important;
                 break-inside: avoid !important;
             }
+
+            .certification-item {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+        }
+
+        /* Certification styles */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .certification-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .certification-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .certification-badge {
+            width: 150px;
+            height: 150px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .certification-title {
+            font-size: 16px;
+            margin: 10px 0 5px;
+            color: #45505b;
+        }
+
+        .certification-issuer {
+            font-size: 14px;
+            color: #777;
+            margin: 0;
         }
     </style>
 
@@ -332,32 +375,35 @@
 
             </section>
 
+            <section class="certifications-section section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-certificate"></i></span>Certifications</h2>
+                <div class="certifications-grid">
+                    {{#each certificaciones}}
+                    <div class="certification-item no-break">
+                        <a href="{{this.url}}" target="_blank">
+                            <img src="{{this.badge}}" alt="{{this.nombre}}" class="certification-badge">
+                            <h4 class="certification-title">{{this.nombre}}</h4>
+                            <p class="certification-issuer">{{this.emisor}}</p>
+                        </a>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+
             <section class="section projects-section no-break">
                 <h2 class="section-title no-break">
                     <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>Some of my projects
                 </h2>
                 <div class="intro no-break">
-                    <p>{{proyectosDescripcion}}
-                    </p>
+                    <p>{{proyectosDescripcion}}</p>
                 </div>
                 {{#each proyectos}}
                 <div class="item no-break">
                     <span class="project-title"><a href="{{this.url}}" target="_blank">{{this.nombre}}</a></span> -
-                    <span class="project-tagline">{{this.descripcion}}</span>
+                    <span class="project-tagline">{{{this.descripcion}}}</span>
                 </div>
                 {{/each}}
-            </section>
-
-            <section class="skills-section section no-break">
-                <h2 class="section-title no-break">
-                    <span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>Skills &amp; Proficiency</h2>
-                <div class="intro">
-                    <p>{{habilidadesDescripcion}}
-                    </p>
-                </div>
-                <div class="skillset">
-                    {{{habilidadesHtml}}}
-                </div>
             </section>
 
         </div>
