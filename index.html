@@ -34,7 +34,7 @@
 
     <style>
         /* Dark theme adjustments */
-        body,
+        /* body,
         .main-wrapper,
         .section {
             background-color: #121212;
@@ -47,7 +47,7 @@
             display: block;
             border-radius: 25px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
+        } 
 
         #downloadCvButton:hover {
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
@@ -134,6 +134,105 @@
         .language-checkbox:checked+.language-label:hover {
             background-color: #218838;
         }
+
+        /* PDF Generation Styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .wrapper {
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white;
+            }
+
+            .sidebar-wrapper {
+                width: 30% !important;
+                display: inline-block !important;
+                vertical-align: top !important;
+            }
+
+            .main-wrapper {
+                width: 65% !important;
+                display: inline-block !important;
+                vertical-align: top !important;
+                margin-left: 2% !important;
+            }
+
+            /* Prevent text splitting */
+            p, li, .description, .title, .degree, .meta {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                orphans: 3 !important;
+                widows: 3 !important;
+            }
+
+            .section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 15px !important;
+            }
+
+            .timeline, .item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 10px !important;
+            }
+
+            #downloadCvButton, 
+            .language-switch {
+                display: none !important;
+            }
+
+            /* Add this new selector */
+            .no-break {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+                orphans: 3 !important;
+                widows: 3 !important;
+                margin-bottom: 10px !important;
+            }
+
+            /* Add these specific styles for section titles */
+            .section-title {
+                display: table !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                white-space: nowrap !important;
+            }
+
+            .section-title .icon-holder {
+                display: inline-block !important;
+                vertical-align: middle !important;
+            }
+
+            /* Timeline specific styles */
+            .timeline-content {
+                display: block !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .timeline-content p {
+                display: inline-block !important;
+                width: 100% !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+
+            .timeline .description {
+                display: block !important;
+                width: 100% !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+        }
     </style>
 
 </head>
@@ -185,7 +284,7 @@
             <div class="education-container container-block">
                 <h2 class="container-block-title">Education</h2>
                 {{#each educacion}}
-                <div class="item">
+                <div class="item no-break">
                     <h4 class="degree">{{this.titulo}}</h4>
                     <h5 class="meta">{{this.institucion}}</h5>
                     <div class="time">{{this.anio}}</div>
@@ -216,42 +315,42 @@
 
         <div class="main-wrapper">
 
-            <section class="section summary-section">
-                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-user"></i></span>Career
-                    Profile
+            <section class="section summary-section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-user"></i></span>Career Profile
                 </h2>
-                <div class="summary">
+                <div class="summary no-break">
                     <p>{{descripcion}}</p>
                 </div>
             </section>
 
-            <section class="section experiences-section">
-                <h2 class="section-title"><span class="icon-holder"><i
-                            class="fa-solid fa-briefcase"></i></span>Experiences</h2>
+            <section class="section experiences-section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-briefcase"></i></span>Experiences</h2>
 
                 {{{experienciaHtml}}}
 
             </section>
 
-            <section class="section projects-section">
-                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-archive"></i></span>Some of my
-                    projects
+            <section class="section projects-section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>Some of my projects
                 </h2>
-                <div class="intro">
+                <div class="intro no-break">
                     <p>{{proyectosDescripcion}}
                     </p>
                 </div>
                 {{#each proyectos}}
-                <div class="item">
+                <div class="item no-break">
                     <span class="project-title"><a href="{{this.url}}" target="_blank">{{this.nombre}}</a></span> -
                     <span class="project-tagline">{{this.descripcion}}</span>
                 </div>
                 {{/each}}
             </section>
 
-            <section class="skills-section section">
-                <h2 class="section-title"><span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>Skills
-                    &amp; Proficiency</h2>
+            <section class="skills-section section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-rocket"></i></span>Skills &amp; Proficiency</h2>
                 <div class="intro">
                     <p>{{habilidadesDescripcion}}
                     </p>
@@ -269,15 +368,54 @@
     <footer class="footer">
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <script>
         const btn = document.getElementById("downloadCvButton");
 
-        btn.addEventListener("click", function () {
-            var element = document.getElementById('cvBody');
-            html2pdf().from(element).save('cv-alexis-taberna.pdf');
+        btn.addEventListener("click", async function () {
+            window.scrollTo(0, 0);
+            const element = document.getElementById('cvBody');
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    scrollY: 0,
+                    windowWidth: element.scrollWidth,
+                    windowHeight: element.scrollHeight
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const pdf = new jspdf.jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                // First page
+                pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                // Additional pages if needed
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('cv-alexis-taberna.pdf');
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+            }
         });
     </script>
 

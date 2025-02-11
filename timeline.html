@@ -3,7 +3,7 @@
 
         {{#each experiencia}}
 
-        <div class="timeline">
+        <div class="timeline no-break" style="display: block; page-break-inside: avoid !important;">
             <div class="icon"></div>
             <div class="date-content">
                 <div class="date-outer">
@@ -13,9 +13,9 @@
                     </span>
                 </div>
             </div>
-            <div class="timeline-content">
+            <div class="timeline-content" style="display: block; page-break-inside: avoid !important;">
                 <h5 class="title">{{puesto}} at {{empresa}}</h5>
-                <p class="description">{{descripcion}}</p>
+                <p class="description" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important;">{{descripcion}}</p>
             </div>
         </div>
         {{/each}}
