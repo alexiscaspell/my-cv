@@ -159,7 +159,9 @@ body {
 .main-timeline .timeline-content {
     width: 50%;
     padding: 20px 0 20px 50px;
-    float: right
+    float: right;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 .main-timeline .title {
@@ -170,7 +172,11 @@ body {
 }
 
 .main-timeline .description {
-    margin-bottom: 0
+    margin-bottom: 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
 }
 
 .main-timeline .timeline:nth-child(2n) .date-content {

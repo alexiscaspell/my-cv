@@ -9,13 +9,15 @@
                 <div class="date-outer">
                     <span class="date">
                         <span class="month">{{fechaInicioMes}}</span>
-                    <span class="year">{{fechaInicioAnio}}</span>
+                        <span class="year">{{fechaInicioAnio}}</span>
                     </span>
                 </div>
             </div>
-            <div class="timeline-content" style="display: block; page-break-inside: avoid !important;">
+            <div class="timeline-content no-break" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important; position: relative;">
                 <h5 class="title">{{puesto}} at {{empresa}}</h5>
-                <p class="description" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important;">{{descripcion}}</p>
+                <div class="description-wrapper no-break" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important;">
+                    <p class="description no-break" style="display: block !important; width: 100% !important; page-break-inside: avoid !important; break-inside: avoid !important; margin-bottom: 0 !important;">{{descripcion}}</p>
+                </div>
             </div>
         </div>
         {{/each}}

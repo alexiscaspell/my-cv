@@ -13,11 +13,18 @@
     "habilidadesDescripcion": "You can find a summary of my skills in my tech radar:",
     "descripcion": "As a professional, I have worked in various roles, from full-stack developer to project leader and DevOps. I consider myself a committed and dedicated professional focused on planning and executing projects in different technologies. I enjoy maintaining smooth communication with the teams I work with, collaborating to ensure everything goes well. Additionally, I am very curious and always willing to learn new tools and methodologies to improve my work and keep my technology knowledge up-to-date.",
     "experiencia": [{
-            "puesto": "Fullstack Developer",
-            "empresa": "IT Resources S.A",
-            "fechaInicio": "March 2017",
-            "fechaFin": "September 2018",
-            "descripcion": "Working in several teams as a full-stack developer, developing end-to-end solutions (frontend, backend, and database), primarily for the SGI application of Swiss Medical, and participating in maintaining and developing new features for the production middleware (using a stack of Java, Spring, JavaScript, Jquery, Bootstrap, SQL Server, and Sybase)."
+            "puesto": "Cloud Engineer",
+            "empresa": "Teracloud",
+            "fechaInicio": "September 2023",
+            "fechaFin": "Present",
+            "descripcion": "Participating in projects of all types with AWS and Azure, from infrastructure creation with Terraform/Terragrunt to CI/CD pipeline implementation (Github Actions, Azure DevOps, ArgoCD), creating services, both serverless and traditional, etc."
+        },
+        {
+            "puesto": "DevOps Engineer",
+            "empresa": "Redbee Studios",
+            "fechaInicio": "March 2021",
+            "fechaFin": "Present",
+            "descripcion": "DevOps Engineer focused on dev-ops collaboration. Implemented CI/CD pipelines (Jenkins, GitLab CI), automation tools (Python, Bash) and workflows (GitFlow, Cloud Config). Led AWS migration using Terraform, ArgoCD and Kubernetes."
         },
         {
             "puesto": "SW Engineer",
@@ -27,18 +34,11 @@
             "descripcion": "Project leader, responsible from the requirements gathering phase to task division, planning, development, and deployment of new products in multiple technologies depending on the project (mainly Java with Spring Boot and Python with Flask or Django)."
         },
         {
-            "puesto": "DevOps Engineer",
-            "empresa": "Redbee Studios",
-            "fechaInicio": "March 2021",
-            "fechaFin": "Present",
-            "descripcion": "DevOps, my role was to ensure collaboration between development and operations teams for efficient code deployment in production. Optimizing development, testing, and operations processes, creating and implementing tools (mostly in Python and Bash), workflows (like Gitflow, centralized configuration with Cloud Config, etc.), and pipelines (Jenkins or GitLab CI). These tasks also included migrating from on-premises to AWS (setting up environments with Terraform, converting Jenkins pipelines to GitLab CI + ArgoCD, creating Kubernetes clusters, etc.)."
-        },
-        {
-            "puesto": "Cloud Engineer",
-            "empresa": "Teracloud",
-            "fechaInicio": "September 2023",
-            "fechaFin": "Present",
-            "descripcion": "Participating in all kinds of projects with AWS and Azure, from infrastructure creation to implementing CI/CD pipelines, serverless services creation, etc."
+            "puesto": "Fullstack Developer",
+            "empresa": "IT Resources S.A",
+            "fechaInicio": "March 2017",
+            "fechaFin": "September 2018",
+            "descripcion": "Full-stack developer working on end-to-end solutions for Swiss Medical's SGI application, using Java, Spring, JavaScript and SQL databases. Maintained and developed new middleware features."
         }
     ],
     "educacion": [{

@@ -18,9 +18,6 @@ app.get('/', (req, res) => {
 
     let experiencia = datos["experiencia"] ?? [];
 
-    // Reverse the experience array to show most recent first
-    experiencia = experiencia.reverse();
-
     experiencia.forEach(e => {
         e["fechaInicioMes"] = e["fechaInicio"].split(" ")[0]
         e["fechaInicioAnio"] = e["fechaInicio"].split(" ")[1]
