@@ -73,16 +73,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 80px;
-            /* Smaller width */
-            height: 30px;
-            /* Smaller height */
+            width: 120px;
+            height: 34px;
             background-color: #007bff;
             border-radius: 15px;
             position: relative;
             cursor: pointer;
             transition: background-color 0.3s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 0 8px;
         }
 
         /* Hover effect */
@@ -93,11 +92,8 @@
         /* Text inside the switch */
         .language-label-text {
             color: #fff;
-            font-size: 12px;
-            /* Smaller font size */
-            font-weight: 500;
-            padding: 0 5px;
-            /* Adjust padding */
+            font-size: 14px;
+            padding: 0 6px;
             z-index: 2;
             user-select: none;
             white-space: nowrap;
@@ -107,24 +103,20 @@
         /* Toggle circle inside the switch */
         .language-label::after {
             content: '';
-            width: 28px;
-            /* Smaller circle */
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background-color: #fff;
             border-radius: 50%;
             position: absolute;
             top: 1px;
-            /* Center vertically */
             left: 1px;
-            /* Default position */
             transition: transform 0.3s ease;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         /* Toggle checked styles */
         .language-checkbox:checked+.language-label::after {
-            transform: translateX(50px);
-            /* Adjust for smaller size */
+            transform: translateX(86px);
         }
 
         .language-checkbox:checked+.language-label {
