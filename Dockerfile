@@ -1,13 +1,16 @@
 FROM node:18-alpine
+
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
 
-RUN npm install -g npm@9.6.3
+# Install dependencies
 RUN npm install
 
+# Copy application files
 COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["node", "app.js"]

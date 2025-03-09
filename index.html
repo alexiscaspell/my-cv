@@ -406,53 +406,504 @@
     <footer class="footer">
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <script>
         const btn = document.getElementById("downloadCvButton");
 
+        // Función para convertir imagen a base64
+        function getImageAsBase64(imgUrl) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
+                    
+                    try {
+                        const dataUrl = canvas.toDataURL("image/png");
+                        resolve(dataUrl);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                
+                img.onerror = (error) => {
+                    reject(error);
+                };
+                
+                img.src = imgUrl;
+            });
+        }
+
         btn.addEventListener("click", async function () {
-            window.scrollTo(0, 0);
             const element = document.getElementById('cvBody');
-            try {
-                const canvas = await html2canvas(element, {
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    scrollY: 0,
-                    windowWidth: element.scrollWidth,
-                    windowHeight: element.scrollHeight
-                });
+            
+            async function extractContent(element) {
+                const content = [];
+                let sidebarContent = [];
+                let mainContent = [];
 
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const pdf = new jspdf.jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4'
-                });
+                // Procesar la barra lateral
+                const sidebar = element.querySelector('.sidebar-wrapper');
+                if (sidebar) {
+                    // Procesar perfil
+                    const profileContainer = sidebar.querySelector('.profile-container');
+                    if (profileContainer) {
+                        const profileImage = profileContainer.querySelector('.profile');
+                        const name = profileContainer.querySelector('.name');
+                        const tagline = profileContainer.querySelector('.tagline');
 
-                const imgWidth = 210; // A4 width in mm
-                const pageHeight = 297; // A4 height in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
+                        if (profileImage) {
+                            try {
+                                const imageData = await getImageAsBase64(profileImage.src);
+                                sidebarContent.push({
+                                    image: imageData,
+                                    width: 150,
+                                    height: 150,
+                                    alignment: 'center',
+                                    margin: [0, 0, 0, 10]
+                                });
+                            } catch (error) {
+                                console.error('Error loading profile image:', error);
+                            }
+                        }
 
-                // First page
-                pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
+                        if (name) {
+                            sidebarContent.push({
+                                text: name.textContent,
+                                style: 'name',
+                                alignment: 'center'
+                            });
+                        }
 
-                // Additional pages if needed
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
+                        if (tagline) {
+                            sidebarContent.push({
+                                text: tagline.textContent,
+                                style: 'tagline',
+                                alignment: 'center',
+                                margin: [0, 0, 0, 20]
+                            });
+                        }
+                    }
+
+                    // Procesar bloques de la barra lateral
+                    const containerBlocks = sidebar.querySelectorAll('.container-block');
+                    containerBlocks.forEach(block => {
+                        const title = block.querySelector('.container-block-title');
+                        if (title) {
+                            sidebarContent.push({
+                                text: title.textContent,
+                                style: 'sidebarTitle',
+                                margin: [0, 15, 0, 10]
+                            });
+                        }
+
+                        // Procesar listas de contacto
+                        const contactList = block.querySelector('.contact-list');
+                        if (contactList) {
+                            const items = contactList.querySelectorAll('li');
+                            items.forEach(item => {
+                                const icon = item.querySelector('i');
+                                const link = item.querySelector('a');
+                                if (link) {
+                                    sidebarContent.push({
+                                        columns: [
+                                            {
+                                                width: 20,
+                                                text: icon ? '•' : '',
+                                                style: 'contactIcon'
+                                            },
+                                            {
+                                                width: '*',
+                                                text: link.textContent,
+                                                link: link.href,
+                                                style: 'contactLink'
+                                            }
+                                        ],
+                                        margin: [0, 0, 0, 5]
+                                    });
+                                }
+                            });
+                        }
+
+                        // Procesar otras listas
+                        const otherLists = block.querySelectorAll('ul:not(.contact-list)');
+                        otherLists.forEach(list => {
+                            const items = list.querySelectorAll('li');
+                            items.forEach(item => {
+                                sidebarContent.push({
+                                    text: item.textContent,
+                                    style: 'sidebarItem',
+                                    margin: [0, 0, 0, 5]
+                                });
+                            });
+                        });
+
+                        // Procesar elementos de educación
+                        const eduItems = block.querySelectorAll('.item');
+                        eduItems.forEach(item => {
+                            const degree = item.querySelector('.degree');
+                            const meta = item.querySelector('.meta');
+                            const time = item.querySelector('.time');
+
+                            if (degree) {
+                                sidebarContent.push({
+                                    text: degree.textContent,
+                                    style: 'degree',
+                                    margin: [0, 5, 0, 0]
+                                });
+                            }
+                            if (meta) {
+                                sidebarContent.push({
+                                    text: meta.textContent,
+                                    style: 'meta',
+                                    margin: [0, 0, 0, 0]
+                                });
+                            }
+                            if (time) {
+                                sidebarContent.push({
+                                    text: time.textContent,
+                                    style: 'time',
+                                    margin: [0, 0, 0, 10]
+                                });
+                            }
+                        });
+                    });
                 }
 
-                pdf.save('cv-alexis-taberna.pdf');
+                // Procesar contenido principal
+                const mainWrapper = element.querySelector('.main-wrapper');
+                if (mainWrapper) {
+                    const sections = mainWrapper.querySelectorAll('.section');
+                    const processSections = async () => {
+                        for (const section of sections) {
+                            const sectionContent = {
+                                stack: [],
+                                margin: [0, 0, 0, 20]
+                            };
+
+                            // Procesar título de sección con icono
+                            const sectionTitle = section.querySelector('.section-title');
+                            if (sectionTitle) {
+                                const icon = sectionTitle.querySelector('i');
+                                sectionContent.stack.push({
+                                    columns: [
+                                        {
+                                            width: 30,
+                                            text: icon ? '•' : '',
+                                            style: 'sectionIcon'
+                                        },
+                                        {
+                                            width: '*',
+                                            text: sectionTitle.textContent.trim(),
+                                            style: 'sectionTitle'
+                                        }
+                                    ],
+                                    margin: [0, 0, 0, 10]
+                                });
+                            }
+
+                            // Procesar resumen
+                            const summary = section.querySelector('.summary');
+                            if (summary) {
+                                sectionContent.stack.push({
+                                    text: summary.textContent.trim(),
+                                    style: 'normalText'
+                                });
+                            }
+
+                            // Procesar timeline
+                            const timeline = section.querySelector('.main-timeline');
+                            if (timeline) {
+                                const timelineItems = timeline.querySelectorAll('.timeline');
+                                for (const item of timelineItems) {
+                                    const date = item.querySelector('.date');
+                                    const title = item.querySelector('.title');
+                                    const description = item.querySelector('.description');
+
+                                    const timelineContent = {
+                                        stack: [],
+                                        margin: [0, 0, 0, 15]
+                                    };
+
+                                    if (date) {
+                                        const month = date.querySelector('.month');
+                                        const year = date.querySelector('.year');
+                                        timelineContent.stack.push({
+                                            columns: [
+                                                {
+                                                    width: 100,
+                                                    stack: [
+                                                        {
+                                                            text: month ? month.textContent : '',
+                                                            style: 'timelineMonth'
+                                                        },
+                                                        {
+                                                            text: year ? year.textContent : '',
+                                                            style: 'timelineYear'
+                                                        }
+                                                    ],
+                                                    alignment: 'center'
+                                                },
+                                                {
+                                                    width: '*',
+                                                    stack: [
+                                                        {
+                                                            text: title ? title.textContent : '',
+                                                            style: 'timelineTitle'
+                                                        },
+                                                        {
+                                                            text: description ? description.textContent : '',
+                                                            style: 'timelineDescription'
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        });
+                                    }
+
+                                    sectionContent.stack.push(timelineContent);
+                                }
+                            }
+
+                            // Procesar certificaciones
+                            const certGrid = section.querySelector('.certifications-grid');
+                            if (certGrid) {
+                                const certItems = certGrid.querySelectorAll('.certification-item');
+                                const certsPerRow = 2;
+                                for (let i = 0; i < certItems.length; i += certsPerRow) {
+                                    const row = {
+                                        columns: [],
+                                        margin: [0, 0, 0, 20]
+                                    };
+
+                                    for (let j = i; j < Math.min(i + certsPerRow, certItems.length); j++) {
+                                        const item = certItems[j];
+                                        const badge = item.querySelector('.certification-badge');
+                                        const title = item.querySelector('.certification-title');
+                                        const issuer = item.querySelector('.certification-issuer');
+
+                                        const certContent = {
+                                            stack: [],
+                                            width: '*',
+                                            alignment: 'center'
+                                        };
+
+                                        if (badge) {
+                                            try {
+                                                const imageData = await getImageAsBase64(badge.src);
+                                                certContent.stack.push({
+                                                    image: imageData,
+                                                    width: 100,
+                                                    height: 100,
+                                                    alignment: 'center'
+                                                });
+                                            } catch (error) {
+                                                console.error('Error loading certification badge:', error);
+                                            }
+                                        }
+
+                                        if (title) {
+                                            certContent.stack.push({
+                                                text: title.textContent,
+                                                style: 'certTitle',
+                                                margin: [0, 5, 0, 0]
+                                            });
+                                        }
+
+                                        if (issuer) {
+                                            certContent.stack.push({
+                                                text: issuer.textContent,
+                                                style: 'certIssuer'
+                                            });
+                                        }
+
+                                        row.columns.push(certContent);
+                                    }
+
+                                    sectionContent.stack.push(row);
+                                }
+                            }
+
+                            // Procesar proyectos
+                            const items = section.querySelectorAll('.item');
+                            for (const item of items) {
+                                const title = item.querySelector('.project-title');
+                                const tagline = item.querySelector('.project-tagline');
+
+                                if (title) {
+                                    sectionContent.stack.push({
+                                        text: title.textContent.trim(),
+                                        style: 'itemTitle',
+                                        margin: [0, 10, 0, 5]
+                                    });
+                                }
+                                if (tagline) {
+                                    sectionContent.stack.push({
+                                        text: tagline.textContent.trim(),
+                                        style: 'itemTagline',
+                                        margin: [0, 0, 0, 10]
+                                    });
+                                }
+                            }
+
+                            mainContent.push(sectionContent);
+                        }
+                    };
+                    await processSections();
+                }
+
+                // Combinar contenido en el layout de dos columnas
+                content.push({
+                    columns: [
+                        {
+                            width: '30%',
+                            stack: sidebarContent,
+                            margin: [0, 0, 20, 0],
+                            background: '#42A8C0'
+                        },
+                        {
+                            width: '70%',
+                            stack: mainContent
+                        }
+                    ]
+                });
+
+                return content;
+            }
+
+            try {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generando PDF...';
+
+                const content = await extractContent(element);
+
+                const docDefinition = {
+                    content: content,
+                    defaultStyle: {
+                        font: 'Roboto',
+                        fontSize: 12,
+                        lineHeight: 1.4
+                    },
+                    styles: {
+                        name: {
+                            fontSize: 24,
+                            bold: true,
+                            color: '#FFFFFF',
+                            margin: [0, 10, 0, 5]
+                        },
+                        tagline: {
+                            fontSize: 16,
+                            color: '#FFFFFF',
+                            italics: true
+                        },
+                        sidebarTitle: {
+                            fontSize: 16,
+                            bold: true,
+                            color: '#FFFFFF'
+                        },
+                        sidebarItem: {
+                            fontSize: 14,
+                            color: '#FFFFFF'
+                        },
+                        contactIcon: {
+                            fontSize: 14,
+                            color: '#FFFFFF'
+                        },
+                        contactLink: {
+                            fontSize: 14,
+                            color: '#FFFFFF',
+                            decoration: 'underline'
+                        },
+                        degree: {
+                            fontSize: 14,
+                            bold: true,
+                            color: '#FFFFFF'
+                        },
+                        meta: {
+                            fontSize: 13,
+                            color: '#FFFFFF'
+                        },
+                        time: {
+                            fontSize: 12,
+                            color: '#FFFFFF',
+                            italics: true
+                        },
+                        sectionIcon: {
+                            fontSize: 16,
+                            color: '#2d7788'
+                        },
+                        sectionTitle: {
+                            fontSize: 20,
+                            bold: true,
+                            color: '#2d7788'
+                        },
+                        normalText: {
+                            fontSize: 14,
+                            color: '#4a4a4a',
+                            lineHeight: 1.5
+                        },
+                        timelineMonth: {
+                            fontSize: 16,
+                            bold: true,
+                            color: '#4a4a4a'
+                        },
+                        timelineYear: {
+                            fontSize: 20,
+                            bold: true,
+                            color: '#4a4a4a'
+                        },
+                        timelineTitle: {
+                            fontSize: 16,
+                            bold: true,
+                            color: '#2d7788',
+                            margin: [0, 0, 0, 5]
+                        },
+                        timelineDescription: {
+                            fontSize: 14,
+                            color: '#4a4a4a',
+                            lineHeight: 1.4
+                        },
+                        itemTitle: {
+                            fontSize: 16,
+                            bold: true,
+                            color: '#2d7788'
+                        },
+                        itemTagline: {
+                            fontSize: 14,
+                            color: '#4a4a4a',
+                            lineHeight: 1.4
+                        },
+                        certTitle: {
+                            fontSize: 14,
+                            bold: true,
+                            color: '#2d7788'
+                        },
+                        certIssuer: {
+                            fontSize: 12,
+                            color: '#4a4a4a',
+                            italics: true
+                        }
+                    },
+                    pageSize: 'A4',
+                    pageMargins: [40, 40, 40, 40],
+                    pageOrientation: 'portrait'
+                };
+
+                pdfMake.createPdf(docDefinition).download('cv-alexis-taberna.pdf');
             } catch (error) {
                 console.error('Error generating PDF:', error);
+                alert('There was an error generating the PDF. Please try again.');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-download"></i> {{descargarCVTitulo}}';
             }
         });
     </script>

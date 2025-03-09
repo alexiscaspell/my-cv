@@ -3,11 +3,17 @@ const handlebars = require('express-handlebars').create();
 const datosEs = require('./assets/data/datos.es.json');
 const datosEn = require('./assets/data/datos.en.json');
 
-
 const app = express();
 
-app.use("/assets", express.static(__dirname + '/assets'));
+// Configurar CORS para las imágenes
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
+app.use("/assets", express.static(__dirname + '/assets'));
 
 // Ruta principal
 app.get('/', (req, res) => {
@@ -33,7 +39,6 @@ app.get('/', (req, res) => {
     })
 
 });
-
 
 // Iniciar el servidor
 app.listen(3000, () => {
