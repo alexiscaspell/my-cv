@@ -764,14 +764,17 @@
                 content.push({
                     columns: [
                         {
-                            width: '30%',
-                            stack: sidebarContent,
-                            margin: [0, 0, 20, 0],
-                            background: '#42A8C0'
+                            width: '70%',
+                            stack: mainContent,
+                            margin: [0, 0, 20, 0]
                         },
                         {
-                            width: '70%',
-                            stack: mainContent
+                            width: '30%',
+                            stack: sidebarContent,
+                            margin: [0, 0, 0, 0],
+                            background: '#42A8C0',
+                            fillColor: '#42A8C0',
+                            padding: [15, 15, 15, 15]
                         }
                     ]
                 });
@@ -807,11 +810,13 @@
                         sidebarTitle: {
                             fontSize: 16,
                             bold: true,
-                            color: '#FFFFFF'
+                            color: '#FFFFFF',
+                            margin: [0, 15, 0, 10]
                         },
                         sidebarItem: {
                             fontSize: 14,
-                            color: '#FFFFFF'
+                            color: '#FFFFFF',
+                            margin: [0, 0, 0, 5]
                         },
                         contactIcon: {
                             fontSize: 14,
