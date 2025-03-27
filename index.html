@@ -440,6 +440,23 @@
 
                 // First page
                 pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+
+                // Obtener todos los enlaces dentro de #cvBody
+                const links = element.querySelectorAll("a");
+                links.forEach(link => {
+                    const rect = link.getBoundingClientRect();
+                    const bodyRect = element.getBoundingClientRect(); // Referencia de #cvBody
+
+                    // Coordenadas relativas a #cvBody ajustadas al tamaño del PDF
+                    const x = ((rect.left - bodyRect.left) / bodyRect.width) * imgWidth;
+                    const y = ((rect.top - bodyRect.top) / bodyRect.height) * imgHeight;
+                    const width = (rect.width / bodyRect.width) * imgWidth;
+                    const height = (rect.height / bodyRect.height) * imgHeight;
+
+                    // Agregar enlace invisible (sin texto sobrepuesto)
+                    pdf.link(x, y, width, height, { url: link.href });
+                });
+
                 heightLeft -= pageHeight;
 
                 // Additional pages if needed
