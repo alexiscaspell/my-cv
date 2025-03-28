@@ -525,11 +525,18 @@
                     // Coordenadas relativas a #cvBody ajustadas al tamaño del PDF
                     const x = ((rect.left - bodyRect.left) / bodyRect.width) * imgWidth;
                     const y = ((rect.top - bodyRect.top) / bodyRect.height) * imgHeight;
-                    const width = (rect.width / bodyRect.width) * imgWidth;
-                    const height = (rect.height / bodyRect.height) * imgHeight;
+                    // Aumentar el ancho del área clickeable
+                    const width = Math.max((rect.width / bodyRect.width) * imgWidth * 1.5, 30); // Mínimo 30mm de ancho
+                    const height = Math.max((rect.height / bodyRect.height) * imgHeight * 1.2, 8); // Mínimo 8mm de alto
 
-                    // Agregar enlace invisible (sin texto sobrepuesto)
-                    pdf.link(x, y, width, height, { url: link.href });
+                    // Centrar el área clickeable expandida sobre el texto original
+                    const extraWidth = width - ((rect.width / bodyRect.width) * imgWidth);
+                    const extraHeight = height - ((rect.height / bodyRect.height) * imgHeight);
+                    const adjustedX = x - (extraWidth / 2);
+                    const adjustedY = y - (extraHeight / 2);
+
+                    // Agregar enlace invisible con área expandida
+                    pdf.link(adjustedX, adjustedY, width, height, { url: link.href });
                 });
 
                 heightLeft -= pageHeight;
