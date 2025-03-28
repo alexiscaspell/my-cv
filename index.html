@@ -229,6 +229,11 @@
                 break-inside: avoid !important;
                 page-break-inside: avoid !important;
             }
+
+            #timeline {
+                max-height: 100vh !important;
+                overflow: hidden !important;
+            }
         }
 
         /* Certification styles */
@@ -269,66 +274,74 @@
             margin: 0;
         }
 
-        /* Timeline specific styles */
+        /* Timeline base styles */
         .timeline-content {
-            display: block !important;
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            display: block;
         }
 
         .timeline-content p {
-            display: inline-block !important;
-            width: 100% !important;
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            display: inline-block;
+            width: 100%;
         }
 
         .timeline .description {
-            display: block !important;
-            width: 100% !important;
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            display: block;
+            width: 100%;
         }
 
-        /* Add these new styles for timeline container */
         #timeline {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-            margin-bottom: 20px !important;
-            max-height: 100vh !important;
-            overflow: hidden !important;
+            margin-bottom: 20px;
         }
 
         #timeline .main-timeline {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
+            position: relative;
         }
 
         #timeline .timeline {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-            margin-bottom: 15px !important;
+            margin-bottom: 15px;
         }
 
         #timeline .timeline:last-child {
-            margin-bottom: 0 !important;
+            margin-bottom: 0;
         }
 
-        #timeline .date-content,
-        #timeline .timeline-content {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-        }
+        @media print {
+            /* Timeline print styles */
+            #timeline {
+                max-height: 100vh !important;
+                overflow: hidden !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
 
-        #timeline .description-wrapper {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-        }
+            /* Prevent page breaks for timeline elements */
+            #timeline .main-timeline,
+            #timeline .timeline,
+            #timeline .date-content,
+            #timeline .timeline-content,
+            #timeline .description-wrapper,
+            #timeline .description,
+            .timeline-content,
+            .timeline-content p,
+            .timeline .description {
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
 
-        #timeline .description {
-            page-break-inside: avoid !important;
-            break-inside: avoid !important;
-            margin-bottom: 0 !important;
+            /* Ensure proper display in PDF */
+            .timeline-content {
+                display: block !important;
+            }
+
+            .timeline-content p {
+                display: inline-block !important;
+                width: 100% !important;
+            }
+
+            .timeline .description {
+                display: block !important;
+                width: 100% !important;
+            }
         }
     </style>
 
