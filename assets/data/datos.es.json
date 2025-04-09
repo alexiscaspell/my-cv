@@ -109,6 +109,12 @@
             "emisor": "Servicios Web de Amazon",
             "badge": "assets/images/badges/aws-sa.png",
             "url": "https://www.credly.com/badges/07e0e6f1-874d-4ffa-bc0b-ec4b4b41296a/public_url"
+        },
+        {
+            "nombre": "AWS Certified Developer",
+            "emisor": "Servicios Web de Amazon",
+            "badge": "assets/images/badges/aws-dev.png",
+            "url": "https://www.credly.com/badges/b4b64ffd-3f9f-4f1e-8f57-a92296a155af/public_url"
         }
     ]
 }
