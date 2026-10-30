@@ -267,6 +267,11 @@ async function main() {
 
   copyDir(ASSETS_DIR, path.join(DIST_DIR, 'assets'));
   console.log('Copied assets/ → dist/assets/');
+
+  // Keep GitHub Pages custom domain attached across workflow deploys.
+  fs.writeFileSync(path.join(DIST_DIR, 'CNAME'), 'cv.toast.com.ar\n', 'utf8');
+  console.log('Wrote dist/CNAME');
+
   console.log('Static build complete.');
 }
 
