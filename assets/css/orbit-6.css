@@ -93,8 +93,22 @@ p {
     margin-bottom: 0;
 }
 
+.sidebar-wrapper .profile-frame {
+    width: 160px;
+    height: 160px;
+    max-width: 100%;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1e2a3a;
+}
+
 .sidebar-wrapper .profile {
-    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
 }
 
 .sidebar-wrapper .contact-list .svg-inline--fa {

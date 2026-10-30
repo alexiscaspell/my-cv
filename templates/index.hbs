@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{lang}}">
 
 <head>
     <title>Mi CV</title>
@@ -33,98 +33,65 @@
     <!-- Custom Styles -->
 
     <style>
-        /* Dark theme adjustments */
-        /* body,
-        .main-wrapper,
-        .section {
-            background-color: #121212;
-            color: #fff;
-        }
-
-        /* Download CV button*/
-        #downloadCvButton {
-            margin: 20px auto;
-            display: block;
-            border-radius: 25px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        } 
-
-        #downloadCvButton:hover {
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Language switch container */
-        .language-switch {
-            position: absolute;
-            top: 10px;
-            left: 10px;
+        .floating-actions {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 9999;
             display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .cv-float-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: inline-flex !important;
+            align-items: center;
             justify-content: center;
-            align-items: center;
-        }
-
-        /* Hide the checkbox */
-        .language-checkbox {
-            display: none;
-        }
-
-        /* Switch label */
-        .language-label {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 120px;
-            height: 34px;
-            background-color: #007bff;
-            border-radius: 15px;
-            position: relative;
+            color: #fff !important;
+            text-decoration: none !important;
+            border: none;
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            padding: 0 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+            font-family: inherit;
+            line-height: 1;
         }
 
-        /* Hover effect */
-        .language-label:hover {
+        .cv-float-btn:hover,
+        .cv-float-btn:focus {
+            color: #fff !important;
+            text-decoration: none !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .cv-float-btn-download {
+            background-color: #007bff;
+        }
+
+        .cv-float-btn-download:hover,
+        .cv-float-btn-download:focus {
             background-color: #0056b3;
         }
 
-        /* Text inside the switch */
-        .language-label-text {
-            color: #fff;
-            font-size: 14px;
-            padding: 0 6px;
-            z-index: 2;
-            user-select: none;
-            white-space: nowrap;
-            text-align: center;
-        }
-
-        /* Toggle circle inside the switch */
-        .language-label::after {
-            content: '';
-            width: 32px;
-            height: 32px;
-            background-color: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Toggle checked styles */
-        .language-checkbox:checked+.language-label::after {
-            transform: translateX(86px);
-        }
-
-        .language-checkbox:checked+.language-label {
+        .cv-float-btn-language {
             background-color: #28a745;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
-        .language-checkbox:checked+.language-label:hover {
+        .cv-float-btn-language:hover,
+        .cv-float-btn-language:focus {
             background-color: #218838;
+        }
+
+        .cv-float-btn i {
+            font-size: 20px;
         }
 
         /* PDF Generation Styles */
@@ -177,8 +144,7 @@
                 margin-bottom: 10px !important;
             }
 
-            #downloadCvButton, 
-            .language-switch {
+            .floating-actions {
                 display: none !important;
             }
 
@@ -348,31 +314,21 @@
 </head>
 
 <body>
-    <!-- Button with custom styles -->
-    <button id="downloadCvButton" class="btn btn-primary btn-lg">
-        <i class="fa-solid fa-download"></i> {{descargarCVTitulo}}
-    </button>
-    <!-- Language switch -->
-    <!-- <div class="language-switcher">
-        <button class="lang-button" onclick="changeLanguage('es')">Español</button>
-        <button class="lang-button" onclick="changeLanguage('en')">English</button>
-    </div> -->
-
-    <!-- Language switch -->
-    <div class="language-switch">
-        <input type="checkbox" id="languageToggle" class="language-checkbox">
-        <label for="languageToggle" class="language-label">
-            <span class="language-label-text">Español</span>
-            <span class="language-label-text">English</span>
-        </label>
+    <div class="floating-actions">
+        <a id="downloadCvButton" class="cv-float-btn cv-float-btn-download" href="{{cvPdfFile}}" download="{{cvPdfFile}}" title="{{descargarCVTitulo}}" aria-label="{{descargarCVTitulo}}">
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+        </a>
+        <a id="languageToggle" class="cv-float-btn cv-float-btn-language" href="{{#if isEn}}index.html{{else}}en.html{{/if}}" title="{{#if isEn}}Español{{else}}English{{/if}}" aria-label="{{#if isEn}}Cambiar a Español{{else}}Switch to English{{/if}}">
+            {{#if isEn}}ES{{else}}EN{{/if}}
+        </a>
     </div>
-
-
 
     <div id="cvBody" class="wrapper mt-lg-5">
         <div class="sidebar-wrapper">
             <div class="profile-container">
-                <img class="profile" src="assets/images/profile.png" alt="" />
+                <div class="profile-frame">
+                    <img class="profile" src="assets/images/profile.png" alt="" />
+                </div>
                 <h1 class="name">{{nombre}}</h1>
                 <h3 class="tagline">{{profesion}}</h3>
             </div>
@@ -416,7 +372,7 @@
                 <h2 class="container-block-title">Interests</h2>
                 <ul class="list-unstyled interests-list">
                     {{#each intereses}}
-                    <li>{{this}}</li>
+                    <li>{{#if this.nombre}}{{this.nombre}}{{else}}{{this}}{{/if}}</li>
                     {{/each}}
                 </ul>
             </div>
@@ -480,109 +436,6 @@
 
     <footer class="footer">
     </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-    <script>
-        const btn = document.getElementById("downloadCvButton");
-
-        btn.addEventListener("click", async function () {
-            window.scrollTo(0, 0);
-            const element = document.getElementById('cvBody');
-            try {
-                const canvas = await html2canvas(element, {
-                    scale: 4,
-                    useCORS: true,
-                    logging: false,
-                    scrollY: 0,
-                    windowWidth: element.scrollWidth,
-                    windowHeight: element.scrollHeight
-                });
-
-                const imgData = canvas.toDataURL('image/jpeg', 1.0);
-                const pdf = new jspdf.jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4'
-                });
-
-                const imgWidth = 210; // A4 width in mm
-                const pageHeight = 297; // A4 height in mm
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
-
-                // First page
-                pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-
-                // Obtener todos los enlaces dentro de #cvBody
-                const links = element.querySelectorAll("a");
-                links.forEach(link => {
-                    const rect = link.getBoundingClientRect();
-                    const bodyRect = element.getBoundingClientRect(); // Referencia de #cvBody
-
-                    // Coordenadas relativas a #cvBody ajustadas al tamaño del PDF
-                    const x = ((rect.left - bodyRect.left) / bodyRect.width) * imgWidth;
-                    const y = ((rect.top - bodyRect.top) / bodyRect.height) * imgHeight;
-                    // Aumentar el ancho del área clickeable
-                    const width = Math.max((rect.width / bodyRect.width) * imgWidth * 1.5, 30); // Mínimo 30mm de ancho
-                    const height = Math.max((rect.height / bodyRect.height) * imgHeight * 1.2, 8); // Mínimo 8mm de alto
-
-                    // Centrar el área clickeable expandida sobre el texto original
-                    const extraWidth = width - ((rect.width / bodyRect.width) * imgWidth);
-                    const extraHeight = height - ((rect.height / bodyRect.height) * imgHeight);
-                    const adjustedX = x - (extraWidth / 2);
-                    const adjustedY = y - (extraHeight / 2);
-
-                    // Agregar enlace invisible con área expandida
-                    pdf.link(adjustedX, adjustedY, width, height, { url: link.href });
-                });
-
-                heightLeft -= pageHeight;
-
-                // Additional pages if needed
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
-
-                pdf.save('cv-alexis-taberna.pdf');
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-            }
-        });
-    </script>
-
-    <script>
-        function changeLanguage(lang) {
-            if(window.location.href.includes('?lang='+lang)) {
-                return;
-            }
-            window.location.href = '?lang=' + lang;
-        }
-        document.getElementById('languageToggle').addEventListener('change', function () {
-            const lang = this.checked ? 'en' : 'es';
-            changeLanguage(lang);
-        });
-
-    </script>
-    <script>
-        // Detect the 'lang' query parameter
-        window.addEventListener("DOMContentLoaded", () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get("lang");
-            const languageToggle = document.getElementById("languageToggle");
-
-            // Check the toggle if 'lang=en'
-            if (lang === "en" && languageToggle.checked === false) {
-                languageToggle.checked = true;
-            }
-        });
-
-    </script>
 
 </body>
 
