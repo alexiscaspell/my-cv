@@ -94,6 +94,20 @@
             font-size: 20px;
         }
 
+        .skills-list {
+            display: grid;
+            gap: 0.45rem;
+        }
+
+        .skill-category {
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .skill-category-name {
+            margin-right: 0.35rem;
+        }
+
         /* PDF Generation Styles */
         @media print {
             body {
@@ -348,7 +362,7 @@
                 </ul>
             </div>
             <div class="education-container container-block">
-                <h2 class="container-block-title">Education</h2>
+                <h2 class="container-block-title">{{ui.educationTitle}}</h2>
                 {{#each educacion}}
                 <div class="item no-break">
                     <h4 class="degree">{{this.titulo}}</h4>
@@ -360,7 +374,7 @@
             </div>
 
             <div class="languages-container container-block">
-                <h2 class="container-block-title">Languages</h2>
+                <h2 class="container-block-title">{{ui.languagesTitle}}</h2>
                 <ul class="list-unstyled interests-list">
                     {{#each lenguajes}}
                     <li>{{this.lenguaje}} <span class="lang-desc">({{this.nivel}})</span></li>
@@ -369,7 +383,7 @@
             </div>
 
             <div class="interests-container container-block">
-                <h2 class="container-block-title">Interests</h2>
+                <h2 class="container-block-title">{{ui.interestsTitle}}</h2>
                 <ul class="list-unstyled interests-list">
                     {{#each intereses}}
                     <li>{{#if this.nombre}}{{this.nombre}}{{else}}{{this}}{{/if}}</li>
@@ -383,16 +397,32 @@
 
             <section class="section summary-section no-break">
                 <h2 class="section-title no-break">
-                    <span class="icon-holder"><i class="fa-solid fa-user"></i></span>Career Profile
+                    <span class="icon-holder"><i class="fa-solid fa-user"></i></span>{{ui.careerProfile}}
                 </h2>
                 <div class="summary no-break">
                     <p>{{descripcion}}</p>
                 </div>
             </section>
 
+            {{#if habilidades}}
+            <section class="section skills-section no-break">
+                <h2 class="section-title no-break">
+                    <span class="icon-holder"><i class="fa-solid fa-code"></i></span>{{ui.skills}}
+                </h2>
+                <div class="skills-list no-break">
+                    {{#each habilidades}}
+                    <div class="skill-category no-break">
+                        <strong class="skill-category-name">{{this.categoria}}:</strong>
+                        <span class="skill-category-items">{{#each this.items}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+                    </div>
+                    {{/each}}
+                </div>
+            </section>
+            {{/if}}
+
             <section class="section experiences-section no-break">
                 <h2 class="section-title no-break">
-                    <span class="icon-holder"><i class="fa-solid fa-briefcase"></i></span>Experiences</h2>
+                    <span class="icon-holder"><i class="fa-solid fa-briefcase"></i></span>{{ui.experiences}}</h2>
 
                 {{{experienciaHtml}}}
 
@@ -400,7 +430,7 @@
 
             <section class="certifications-section section no-break">
                 <h2 class="section-title no-break">
-                    <span class="icon-holder"><i class="fa-solid fa-certificate"></i></span>Certifications</h2>
+                    <span class="icon-holder"><i class="fa-solid fa-certificate"></i></span>{{ui.certificationsTitle}}</h2>
                 <div class="certifications-grid">
                     {{#each certificaciones}}
                     <div class="certification-item no-break">
@@ -416,7 +446,7 @@
 
             <section class="section projects-section no-break">
                 <h2 class="section-title no-break">
-                    <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>Some of my projects
+                    <span class="icon-holder"><i class="fa-solid fa-archive"></i></span>{{ui.projectsTitle}}
                 </h2>
                 <div class="intro no-break">
                     <p>{{proyectosDescripcion}}</p>

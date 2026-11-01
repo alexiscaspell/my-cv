@@ -42,6 +42,14 @@ function labelsFor(lang) {
         url: 'URL',
         languages: 'LANGUAGES',
         interests: 'INTERESTS',
+        skills: 'TECHNICAL SKILLS',
+        careerProfile: 'Career Profile',
+        experiences: 'Experience',
+        certificationsTitle: 'Certifications',
+        projectsTitle: 'Selected Projects',
+        educationTitle: 'Education',
+        languagesTitle: 'Languages',
+        interestsTitle: 'Interests',
       }
     : {
         name: 'Nombre',
@@ -62,6 +70,14 @@ function labelsFor(lang) {
         url: 'URL',
         languages: 'IDIOMAS',
         interests: 'INTERESES',
+        skills: 'HABILIDADES TÉCNICAS',
+        careerProfile: 'Perfil profesional',
+        experiences: 'Experiencia',
+        certificationsTitle: 'Certificaciones',
+        projectsTitle: 'Proyectos destacados',
+        educationTitle: 'Educación',
+        languagesTitle: 'Idiomas',
+        interestsTitle: 'Intereses',
       };
 }
 
@@ -78,6 +94,7 @@ function prepareData(datos, lang) {
   data.lang = lang;
   data.isEn = lang === 'en';
   data.cvPdfFile = lang === 'en' ? 'cv-alexis-taberna.en.pdf' : 'cv-alexis-taberna.es.pdf';
+  data.ui = labelsFor(lang);
 
   return data;
 }
@@ -154,6 +171,16 @@ function buildPdfCv(datos, lang, outPath) {
     writeSectionTitle(doc, labels.summary);
     writeBody(doc, data.descripcion);
 
+    if (Array.isArray(data.habilidades) && data.habilidades.length) {
+      writeSectionTitle(doc, labels.skills);
+      for (const skill of data.habilidades) {
+        ensureSpace(doc, 28);
+        const items = Array.isArray(skill.items) ? skill.items.join(', ') : '';
+        doc.font('Helvetica-Bold').fontSize(10).text(`${skill.categoria}: `, { continued: true });
+        doc.font('Helvetica').fontSize(10).text(items);
+      }
+    }
+
     if (experiencia.length) {
       writeSectionTitle(doc, labels.experience);
       for (const job of experiencia) {
@@ -161,7 +188,17 @@ function buildPdfCv(datos, lang, outPath) {
         doc.moveDown(0.3);
         doc.font('Helvetica-Bold').fontSize(11).text(`${job.puesto} | ${job.empresa}`);
         doc.font('Helvetica-Oblique').fontSize(9).text(`${labels.period}: ${job.fechaInicio} - ${job.fechaFin}`);
-        writeBody(doc, job.descripcion);
+        if (Array.isArray(job.logros) && job.logros.length) {
+          for (const logro of job.logros) {
+            ensureSpace(doc, 36);
+            doc.font('Helvetica').fontSize(10).text(`• ${stripHtml(logro)}`, {
+              align: 'left',
+              indent: 10,
+            });
+          }
+        } else {
+          writeBody(doc, job.descripcion);
+        }
       }
     }
 

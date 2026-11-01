@@ -16,7 +16,15 @@
             <div class="timeline-content no-break" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important; position: relative;">
                 <h5 class="title">{{puesto}} at {{empresa}}</h5>
                 <div class="description-wrapper no-break" style="display: block; page-break-inside: avoid !important; break-inside: avoid !important;">
+                    {{#if logros}}
+                    <ul class="description experience-bullets no-break" style="display: block !important; width: 100% !important; page-break-inside: avoid !important; break-inside: avoid !important; margin-bottom: 0 !important; padding-left: 1.1rem;">
+                        {{#each logros}}
+                        <li class="no-break" style="margin-bottom: 0.35rem;">{{this}}</li>
+                        {{/each}}
+                    </ul>
+                    {{else}}
                     <p class="description no-break" style="display: block !important; width: 100% !important; page-break-inside: avoid !important; break-inside: avoid !important; margin-bottom: 0 !important;">{{descripcion}}</p>
+                    {{/if}}
                 </div>
             </div>
         </div>
