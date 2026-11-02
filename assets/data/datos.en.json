@@ -104,15 +104,15 @@
     ],
     "lenguajes": [{
             "lenguaje": "Spanish",
-            "nivel": "Native"
+            "nivel": "C2"
         },
         {
             "lenguaje": "English",
-            "nivel": "Intermediate"
+            "nivel": "B2"
         },
         {
             "lenguaje": "Portuguese",
-            "nivel": "Basic"
+            "nivel": "A2"
         }
     ],
     "proyectos": [

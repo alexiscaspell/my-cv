@@ -171,16 +171,6 @@ function buildPdfCv(datos, lang, outPath) {
     writeSectionTitle(doc, labels.summary);
     writeBody(doc, data.descripcion);
 
-    if (Array.isArray(data.habilidades) && data.habilidades.length) {
-      writeSectionTitle(doc, labels.skills);
-      for (const skill of data.habilidades) {
-        ensureSpace(doc, 28);
-        const items = Array.isArray(skill.items) ? skill.items.join(', ') : '';
-        doc.font('Helvetica-Bold').fontSize(10).text(`${skill.categoria}: `, { continued: true });
-        doc.font('Helvetica').fontSize(10).text(items);
-      }
-    }
-
     if (experiencia.length) {
       writeSectionTitle(doc, labels.experience);
       for (const job of experiencia) {
@@ -199,6 +189,16 @@ function buildPdfCv(datos, lang, outPath) {
         } else {
           writeBody(doc, job.descripcion);
         }
+      }
+    }
+
+    if (Array.isArray(data.habilidades) && data.habilidades.length) {
+      writeSectionTitle(doc, labels.skills);
+      for (const skill of data.habilidades) {
+        ensureSpace(doc, 28);
+        const items = Array.isArray(skill.items) ? skill.items.join(', ') : '';
+        doc.font('Helvetica-Bold').fontSize(10).text(`${skill.categoria}: `, { continued: true });
+        doc.font('Helvetica').fontSize(10).text(items);
       }
     }
 
