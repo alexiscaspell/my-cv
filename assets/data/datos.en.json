@@ -110,8 +110,8 @@
         {
             "puesto": "Cloud Engineer",
             "empresa": "Teracloud",
-            "fechaInicio": "September 2023",
-            "fechaFin": "June 2025",
+            "fechaInicio": "October 2023",
+            "fechaFin": "July 2025",
             "logros": [
                 "Worked as a cloud infrastructure consultant for clients in the financial and consumer technology sectors, taking ownership of Infrastructure as Code and delivery processes on AWS and Azure.",
                 "Designed and implemented infrastructure using Terraform and Terragrunt, including legacy module migrations, state import and centralization into a monorepo, and targeted solutions for platform problems.",
@@ -125,7 +125,7 @@
             "puesto": "DevOps Engineer",
             "empresa": "Redbee Studios (Payway)",
             "fechaInicio": "March 2021",
-            "fechaFin": "August 2023",
+            "fechaFin": "October 2023",
             "logros": [
                 "Joined as a Scala developer and evolved into a DevOps role, taking ownership of pipelines, delivery standards, and on-premise environment operations for Scala and Next.js applications.",
                 "Led CI/CD migrations and modernizations: Jenkins upgrades, repository migration from GitHub to Bitbucket, and consolidation of Bitbucket, GitHub, and Jenkins pipelines onto GitLab CI.",
