@@ -1,6 +1,6 @@
 {
     "nombre": "Alexis Taberna",
-    "profesion": "Platform / DevOps / SRE Engineer",
+    "profesion": "Senior Platform Engineer | DevOps | SRE",
     "correo": "alexiscaspell@gmail.com",
     "linkedin": "https://www.linkedin.com/in/alexis-taberna-devops/",
     "github": "https://github.com/alexiscaspell",
@@ -11,17 +11,86 @@
     "descargarCVTitulo": "Download CV",
     "proyectosDescripcion": "Selected personal projects that reinforce my platform, automation, and infrastructure profile:",
     "habilidadesDescripcion": "Technical skills",
-    "descripcion": "Platform / DevOps / SRE engineer with 9+ years across software and infrastructure. Experienced designing delivery platforms (CI/CD, GitOps, Kubernetes, service mesh) and operating high-criticality production environments. Career path from full-stack development to cloud and platform engineering: automation, IaC (Terraform/Terragrunt), observability, and developer experience. Focused on technical ownership, standardization, and reliable paths to production.",
+    "descripcion": "Platform Engineer with 9+ years of experience, starting in software development (Java/Spring backends, Python services, and full-stack applications) and growing into cloud infrastructure, DevOps, and platform engineering. Specialized in CI/CD, Kubernetes, GitOps, and Infrastructure as Code (IaC), with experience designing and operating high-criticality production environments.\n\nExperience leading infrastructure and CI/CD migrations, optimizing pipelines, and building tools that improve the reliability and efficiency of deployments.",
     "habilidades": [
-        { "categoria": "Cloud Platforms", "items": ["AWS (Lambda, API Gateway, Cognito, ECS, EKS, EC2, S3, CloudFront, RDS, Route53, SNS, CloudWatch, Glue, IAM)", "Azure"] },
-        { "categoria": "Containers & Orchestration", "items": ["Kubernetes", "Docker", "containerd", "ECS", "EKS"] },
-        { "categoria": "Infrastructure as Code", "items": ["Terraform", "Terragrunt", "Helm"] },
-        { "categoria": "CI/CD", "items": ["GitHub Actions", "GitLab CI", "Jenkins", "Azure DevOps"] },
-        { "categoria": "GitOps & Delivery", "items": ["ArgoCD", "Istio", "Kong", "Signadot"] },
-        { "categoria": "Observability", "items": ["Datadog", "Prometheus", "Grafana", "ELK/OpenSearch", "CloudWatch", "Splunk"] },
-        { "categoria": "Reliability", "items": ["Incident response", "On-call support", "Postmortems"] },
-        { "categoria": "Programming & Automation", "items": ["Python", "Bash", "Go", "Java"] },
-        { "categoria": "Quality", "items": ["SonarQube"] }
+        {
+            "categoria": "Cloud Platforms",
+            "items": [
+                "AWS (Lambda, API Gateway, Cognito, ECS, EKS, EC2, S3, CloudFront, RDS, Route 53, SNS, CloudWatch, Glue, IAM)",
+                "Azure"
+            ]
+        },
+        {
+            "categoria": "Containers & Orchestration",
+            "items": [
+                "Kubernetes",
+                "Docker",
+                "containerd",
+                "ECS",
+                "EKS"
+            ]
+        },
+        {
+            "categoria": "Infrastructure as Code",
+            "items": [
+                "Terraform",
+                "Terragrunt",
+                "Helm"
+            ]
+        },
+        {
+            "categoria": "CI/CD",
+            "items": [
+                "GitHub Actions",
+                "GitLab CI",
+                "Jenkins",
+                "Azure DevOps"
+            ]
+        },
+        {
+            "categoria": "GitOps & Platform Engineering",
+            "items": [
+                "ArgoCD",
+                "Istio",
+                "Kong",
+                "Signadot"
+            ]
+        },
+        {
+            "categoria": "Observability",
+            "items": [
+                "Datadog",
+                "Prometheus",
+                "Grafana",
+                "ELK/OpenSearch",
+                "CloudWatch",
+                "Splunk"
+            ]
+        },
+        {
+            "categoria": "Reliability & Operations",
+            "items": [
+                "Incident Response",
+                "On-call Support",
+                "Postmortems"
+            ]
+        },
+        {
+            "categoria": "Programming & Automation",
+            "items": [
+                "Python",
+                "Bash",
+                "Go",
+                "Java",
+                "Scala"
+            ]
+        },
+        {
+            "categoria": "Code Quality",
+            "items": [
+                "SonarQube"
+            ]
+        }
     ],
     "experiencia": [
         {
@@ -30,11 +99,12 @@
             "fechaInicio": "July 2025",
             "fechaFin": "Present",
             "logros": [
-                "Design and maintain the delivery platform in a high-throughput fintech environment (thousands of production changes), focusing on reusable GitHub Actions, GitOps (ArgoCD/Kubernetes), and a reliable path to production.",
-                "Improved shared pipelines for Java and Go applications: performance, Sonar integration, Signadot testing sandboxes, and unit tests for the GitHub Actions themselves.",
-                "Owned and executed two Istio routing migrations across ~300 repositories - from a flat VirtualGateway to VirtualService model to a hierarchical gateway + root VirtualService + delegated leafs - with zero downtime.",
-                "Redesigned canary promotion metrics to use canary-scoped signals instead of aggregate production error rates, preventing stalled rollouts when baseline traffic was already degraded.",
-                "Manage Datadog alerts for pipelines and Kubernetes infrastructure components as code (Git + Terraform), and publish standards/docs that help developers resolve delivery issues without leaving their code focus."
+                "Designed and maintained the delivery platform in a high-throughput fintech environment, with thousands of changes deployed to production every day, focusing on reusable GitHub Actions, GitOps (ArgoCD/Kubernetes), and deployment process reliability.",
+                "Optimized shared pipelines for Java and Go applications, improving their performance and integrating Sonar, isolated testing environments with Signadot, and unit tests for the GitHub Actions themselves.",
+                "Led end-to-end two Istio routing migrations involving approximately 300 repositories, implementing a hierarchical VirtualServices model with delegation, with no service interruptions.",
+                "Redesigned the Canary Deployments promotion metric to evaluate canary signals instead of global production error rates, avoiding blockers when baseline services were already degraded.",
+                "Manage Datadog alerts for pipelines and Kubernetes infrastructure components using versioned configurations in Git and Terraform.",
+                "Document technical standards and procedures to facilitate troubleshooting and improve the developer experience."
             ]
         },
         {
@@ -43,11 +113,12 @@
             "fechaInicio": "September 2023",
             "fechaFin": "June 2025",
             "logros": [
-                "Cloud infrastructure consultant for client accounts (banking proxies and consumer tech), owning IaC and delivery work across AWS and Azure.",
-                "Designed and implemented infrastructure with Terraform/Terragrunt: legacy module migrations, Terraform import/centralization into a monorepo, and targeted platform solutions for client-specific problems.",
-                "Delivered workload migrations: EC2+Docker Compose to ECS, ECS modernizations, serverless (Lambda + API Gateway), RDS, DNS to Route53, and Kubernetes cluster version upgrades on AWS and Azure.",
-                "Improved observability and operational response: Datadog monitors and a reusable CloudWatch to SNS to Lambda alerting path to Microsoft Teams across multiple applications.",
-                "Built CI/CD pipelines in GitHub Actions and Azure DevOps for Lambda, S3+CloudFront static apps, infra with Infracost, and a pipeline to ship Python code directly to AWS Glue; plus internal tooling to migrate/import infrastructure and streamline AWS CLI operations."
+                "Worked as a cloud infrastructure consultant for clients in the financial and consumer technology sectors, taking ownership of Infrastructure as Code and delivery processes on AWS and Azure.",
+                "Designed and implemented infrastructure using Terraform and Terragrunt, including legacy module migrations, state import and centralization into a monorepo, and targeted solutions for platform problems.",
+                "Executed workload migrations and modernizations to AWS services such as ECS, Lambda, API Gateway, and RDS, plus DNS migrations to Route 53 and Kubernetes cluster upgrades on AWS and Azure.",
+                "Improved observability and operational response through Datadog monitors and a reusable CloudWatch → SNS → Lambda alerting pattern integrated with Microsoft Teams.",
+                "Designed and implemented CI/CD pipelines using GitHub Actions and Azure DevOps for serverless applications, static sites deployed on S3 and CloudFront, infrastructure as code, and AWS Glue.",
+                "Developed internal tooling to automate infrastructure migrations and imports and streamline operations via the AWS CLI."
             ]
         },
         {
@@ -56,12 +127,12 @@
             "fechaInicio": "March 2021",
             "fechaFin": "August 2023",
             "logros": [
-                "Started as a Scala developer and moved into DevOps on Payway: pipelines, delivery standards, and lower-environment operations on-prem for Scala and Next.js applications.",
-                "Owned and executed CI/CD migrations: Jenkins modernization (Git plugins), GitHub to Bitbucket, and consolidation of Bitbucket/GitHub/Jenkins pipelines onto GitLab CI.",
-                "Migrated workloads from Apache Mesos to Kubernetes and established a Terraform + Helm foundation to ship applications via GitOps (ArgoCD).",
-                "Standardized quality and branching: SonarQube across repositories and a GitHub Flow to GitFlow migration (pipelines, documentation, and team enablement).",
-                "Improved developer/QA experience with a tool to exercise cluster-running code from local machines and a Discord bot for common support questions.",
-                "Designed pipelines and tooling to configure Kong routing (API gateway used heavily on the project), enabling developers to manage routes without operational friction."
+                "Joined as a Scala developer and evolved into a DevOps role, taking ownership of pipelines, delivery standards, and on-premise environment operations for Scala and Next.js applications.",
+                "Led CI/CD migrations and modernizations: Jenkins upgrades, repository migration from GitHub to Bitbucket, and consolidation of Bitbucket, GitHub, and Jenkins pipelines onto GitLab CI.",
+                "Migrated workloads from Apache Mesos to Kubernetes and implemented an infrastructure foundation with Terraform and Helm to deploy applications via GitOps using ArgoCD.",
+                "Standardized quality and branching processes by integrating SonarQube across repositories and migrating from GitHub Flow to GitFlow, including pipelines, documentation, and team training.",
+                "Built tooling to improve developer and QA experience, including a solution to locally test code running in the cluster and a Discord bot to answer common support questions.",
+                "Designed pipelines and tooling to automate Kong API Gateway routing configuration, enabling developers to manage routes with less operational dependency."
             ]
         },
         {
@@ -69,6 +140,7 @@
             "empresa": "LEAFNOISE Company S.A",
             "fechaInicio": "September 2018",
             "fechaFin": "March 2021",
+            "ocultarEnPdf": true,
             "logros": [
                 "Built Java (Spring) backends for public-sector and payments clients (ANSES, Ministry of Production, AFIP, payment proxy) and Python services.",
                 "Developed ETLs with a custom Python tool; installed and configured Apache Druid and visualization dashboards (including Apache Superset).",
@@ -80,6 +152,7 @@
             "empresa": "IT Resources S.A",
             "fechaInicio": "March 2017",
             "fechaFin": "September 2018",
+            "ocultarEnPdf": true,
             "logros": [
                 "Delivered end-to-end features on the Swiss Medical platform (Java 1.6-1.8, Spring, JavaScript/Backbone, REST), including workflows with jBPM and Apache Camel.",
                 "Owned database migrations and related queries for those deliveries.",
@@ -90,8 +163,8 @@
     "educacion": [
         {
             "titulo": "Information Systems Engineering",
-            "institucion": "Univ. Tecnologica Nacional",
-            "anio": "Present",
+            "institucion": "Universidad Tecnológica Nacional (UTN)",
+            "anio": "In progress",
             "cursos": []
         },
         {
@@ -102,74 +175,93 @@
             "cursos": []
         }
     ],
-    "lenguajes": [{
+    "lenguajes": [
+        {
             "lenguaje": "Spanish",
-            "nivel": "C2"
+            "nivel": "C2",
+            "detalle": "Native"
         },
         {
             "lenguaje": "English",
-            "nivel": "B2"
+            "nivel": "B2",
+            "detalle": "Upper intermediate"
         },
         {
             "lenguaje": "Portuguese",
-            "nivel": "A2"
+            "nivel": "A2",
+            "detalle": "Basic"
         }
     ],
     "proyectos": [
         {
             "nombre": "Savior",
             "url": "https://github.com/alexiscaspell/savior",
-            "descripcion": "DevOps remediation engine: FastAPI services/rules/consequences model, React/Vite admin UI, Dockerized delivery."
+            "descripcion": "DevOps remediation engine: FastAPI services/rules/consequences model, React/Vite admin UI, Dockerized delivery.",
+            "ocultarEnPdf": true
         },
         {
             "nombre": "terraform-modules",
             "url": "https://github.com/alexiscaspell/terraform-modules",
-            "descripcion": "Reusable Terraform/Terragrunt modules: AWS (SNS to Teams alarms, Route53, IAM, Glue), ArgoCD, and kubeadm provisioning."
+            "descripcion": "Reusable Terraform/Terragrunt modules: AWS (SNS to Teams alarms, Route53, IAM, Glue), ArgoCD, and kubeadm provisioning.",
+            "ocultarEnPdf": true
         },
         {
             "nombre": "my-cluster",
             "url": "https://github.com/alexiscaspell/my-cluster",
-            "descripcion": "Self-managed Kubernetes (kubeadm/containerd/Flannel) via Terragrunt: bootstrap, declarative worker sync, and ArgoCD."
+            "descripcion": "Self-managed Kubernetes (kubeadm/containerd/Flannel) via Terragrunt: bootstrap, declarative worker sync, and ArgoCD.",
+            "ocultarEnPdf": true
         },
         {
             "nombre": "LocalBooth",
             "url": "https://github.com/alexiscaspell/LocalBooth",
-            "descripcion": "Ubuntu Server autoinstall USB (online/offline) with Docker/SSH/Git bootstrap for hands-off machine provisioning."
+            "descripcion": "Ubuntu Server autoinstall USB (online/offline) with Docker/SSH/Git bootstrap for hands-off machine provisioning.",
+            "ocultarEnPdf": true
         },
         {
             "nombre": "vaporcito",
             "url": "https://github.com/alexiscaspell/vaporcito",
-            "descripcion": "Cross-PC savegame sync: Go engine, web/desktop UI, Docker Compose, and SemVer releases via GitHub Actions."
+            "descripcion": "Cross-PC savegame sync: Go engine, web/desktop UI, Docker Compose, and SemVer releases via GitHub Actions.",
+            "ocultarEnPdf": true
         },
         {
             "nombre": "SSHake",
             "url": "https://github.com/alexiscaspell/SSHake",
-            "descripcion": "YAML-driven SSH hop/tunnel orchestration, runnable with Docker/Python for internal network access."
+            "descripcion": "YAML-driven SSH hop/tunnel orchestration, runnable with Docker/Python for internal network access.",
+            "ocultarEnPdf": true
         }
     ],
     "intereses": [
-        { "nombre": "Cloud", "ocultarEnPdf": true },
-        { "nombre": "Automation", "ocultarEnPdf": true },
-        { "nombre": "New Technologies", "ocultarEnPdf": true }
+        {
+            "nombre": "Cloud",
+            "ocultarEnPdf": true
+        },
+        {
+            "nombre": "Automation",
+            "ocultarEnPdf": true
+        },
+        {
+            "nombre": "New Technologies",
+            "ocultarEnPdf": true
+        }
     ],
     "certificaciones": [
         {
-            "nombre": "AWS Certified Cloud Practitioner",
-            "emisor": "Amazon Web Services",
-            "badge": "assets/images/badges/aws-cp.png",
-            "url": "https://www.credly.com/badges/c4d7d48c-b8a3-4182-b817-21f751293b98/public_url"
-        },
-        {
-            "nombre": "AWS Certified Solutions Architect",
+            "nombre": "AWS Certified Solutions Architect - Associate",
             "emisor": "Amazon Web Services",
             "badge": "assets/images/badges/aws-sa.png",
             "url": "https://www.credly.com/badges/07e0e6f1-874d-4ffa-bc0b-ec4b4b41296a/public_url"
         },
         {
-            "nombre": "AWS Certified Developer",
+            "nombre": "AWS Certified Developer - Associate",
             "emisor": "Amazon Web Services",
             "badge": "assets/images/badges/aws-dev.png",
             "url": "https://www.credly.com/badges/b4b64ffd-3f9f-4f1e-8f57-a92296a155af/public_url"
+        },
+        {
+            "nombre": "AWS Certified Cloud Practitioner",
+            "emisor": "Amazon Web Services",
+            "badge": "assets/images/badges/aws-cp.png",
+            "url": "https://www.credly.com/badges/c4d7d48c-b8a3-4182-b817-21f751293b98/public_url"
         },
         {
             "nombre": "Claude Certified Associate Foundations",

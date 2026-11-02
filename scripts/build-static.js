@@ -8,6 +8,50 @@ const ROOT = path.join(__dirname, '..');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 const DIST_DIR = path.join(ROOT, 'dist');
 const ASSETS_DIR = path.join(ROOT, 'assets');
+const FONTS_DIR = path.join(ASSETS_DIR, 'fonts');
+
+const FONT = {
+  regular: 'Arial',
+  bold: 'Arial-Bold',
+  italic: 'Arial-Italic',
+  boldItalic: 'Arial-BoldItalic',
+};
+
+// Matched to the Google Docs reference CV spacing/typography.
+const SIZE = {
+  name: 22,
+  body: 12,
+  contact: 10,
+  heading: 17,
+};
+
+const SPACE = {
+  top: 70,
+  bottom: 50,
+  left: 50,
+  right: 50,
+  nameToRole: 15,
+  roleToContact: 16,
+  // Net visual targets from the Google Docs PDF; values are slightly lower
+  // because PDFKit already leaves trailing lineGap after the previous block.
+  afterContact: 18,
+  beforeSection: 18,
+  afterSection: 23,
+  jobToDates: 9,
+  datesToBullets: 20,
+  betweenJobs: 22,
+  bodyLineGap: 8,
+  contactLineGap: 7,
+  bulletInset: 18,
+  bulletTextInset: 36,
+};
+
+function registerPdfFonts(doc) {
+  doc.registerFont(FONT.regular, path.join(FONTS_DIR, 'Arial.ttf'));
+  doc.registerFont(FONT.bold, path.join(FONTS_DIR, 'Arial-Bold.ttf'));
+  doc.registerFont(FONT.italic, path.join(FONTS_DIR, 'Arial-Italic.ttf'));
+  doc.registerFont(FONT.boldItalic, path.join(FONTS_DIR, 'Arial-BoldItalic.ttf'));
+}
 
 function loadJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -31,13 +75,13 @@ function labelsFor(lang) {
         linkedin: 'LinkedIn',
         github: 'GitHub',
         whatsapp: 'WhatsApp',
-        summary: 'SUMMARY',
-        experience: 'EXPERIENCE',
+        summary: 'PROFESSIONAL SUMMARY',
+        experience: 'PROFESSIONAL EXPERIENCE',
         period: 'Period',
         education: 'EDUCATION',
         certifications: 'CERTIFICATIONS',
         issuer: 'Issuer',
-        credential: 'Credential URL',
+        credential: 'Credential',
         projects: 'PROJECTS',
         url: 'URL',
         languages: 'LANGUAGES',
@@ -59,13 +103,13 @@ function labelsFor(lang) {
         linkedin: 'LinkedIn',
         github: 'GitHub',
         whatsapp: 'WhatsApp',
-        summary: 'PERFIL',
-        experience: 'EXPERIENCIA',
+        summary: 'PERFIL PROFESIONAL',
+        experience: 'EXPERIENCIA PROFESIONAL',
         period: 'Período',
         education: 'EDUCACIÓN',
         certifications: 'CERTIFICACIONES',
         issuer: 'Emisor',
-        credential: 'URL de credencial',
+        credential: 'Credencial',
         projects: 'PROYECTOS',
         url: 'URL',
         languages: 'IDIOMAS',
@@ -99,28 +143,66 @@ function prepareData(datos, lang) {
   return data;
 }
 
+function contentWidth(doc) {
+  return doc.page.width - doc.page.margins.left - doc.page.margins.right;
+}
+
+function resetCursorX(doc) {
+  doc.x = doc.page.margins.left;
+}
+
 function ensureSpace(doc, needed = 60) {
   if (doc.y + needed > doc.page.height - doc.page.margins.bottom) {
     doc.addPage();
   }
+  resetCursorX(doc);
 }
 
-function writeSectionTitle(doc, title) {
+function addSpace(doc, pts) {
+  doc.y += pts;
+}
+
+function writeSectionTitle(doc, title, { first = false, keepWith = 48 } = {}) {
+  const before = first ? 0 : SPACE.beforeSection;
+  ensureSpace(doc, before + SIZE.heading + SPACE.afterSection + keepWith);
+  if (!first) addSpace(doc, SPACE.beforeSection);
+  resetCursorX(doc);
+  doc.font(FONT.bold).fontSize(SIZE.heading).text(title, doc.page.margins.left, doc.y, {
+    width: contentWidth(doc),
+    lineGap: 0,
+  });
+  addSpace(doc, SPACE.afterSection);
+  resetCursorX(doc);
+}
+
+function writeBody(doc, text, opts = {}) {
+  resetCursorX(doc);
+  doc.font(opts.font || FONT.regular).fontSize(SIZE.body).text(stripHtml(text), doc.page.margins.left, doc.y, {
+    width: contentWidth(doc),
+    align: 'left',
+    lineGap: SPACE.bodyLineGap,
+    ...opts,
+  });
+  resetCursorX(doc);
+}
+
+function writeBullet(doc, text) {
   ensureSpace(doc, 40);
-  doc.moveDown(0.6);
-  doc.font('Helvetica-Bold').fontSize(12).text(title);
-  doc
-    .moveTo(doc.page.margins.left, doc.y + 2)
-    .lineTo(doc.page.width - doc.page.margins.right, doc.y + 2)
-    .strokeColor('#999999')
-    .lineWidth(0.5)
-    .stroke();
-  doc.moveDown(0.5);
-  doc.fillColor('#000000');
-}
+  const left = doc.page.margins.left;
+  const startY = doc.y;
+  const bulletX = left + SPACE.bulletInset;
+  const textX = left + SPACE.bulletTextInset;
+  const width = doc.page.width - doc.page.margins.right - textX;
+  const clean = stripHtml(text);
 
-function writeBody(doc, text) {
-  doc.font('Helvetica').fontSize(10).text(stripHtml(text), { align: 'left' });
+  doc.font(FONT.regular).fontSize(SIZE.body);
+  doc.text('●', bulletX, startY, { lineBreak: false, lineGap: SPACE.bodyLineGap });
+  doc.text(clean, textX, startY, {
+    width,
+    align: 'left',
+    lineGap: SPACE.bodyLineGap,
+  });
+  resetCursorX(doc);
 }
 
 /** Items with ocultarEnPdf: true are skipped in the PDF. Missing field => show (false). */
@@ -131,6 +213,13 @@ function visibleInPdf(items = []) {
   });
 }
 
+function paragraphsFrom(text) {
+  return String(text ?? '')
+    .split(/\n\s*\n/)
+    .map((p) => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
 function buildPdfCv(datos, lang, outPath) {
   return new Promise((resolve, reject) => {
     const data = prepareData(datos, lang);
@@ -138,16 +227,16 @@ function buildPdfCv(datos, lang, outPath) {
     const experiencia = visibleInPdf(data.experiencia);
     const educacion = visibleInPdf(data.educacion);
     const certificaciones = visibleInPdf(data.certificaciones);
-    const proyectos = visibleInPdf(data.proyectos);
     const lenguajes = visibleInPdf(data.lenguajes);
-    const intereses = visibleInPdf(
-      (data.intereses ?? []).map((item) =>
-        typeof item === 'string' ? { nombre: item } : item
-      )
-    );
 
     const doc = new PDFDocument({
-      margin: 50,
+      size: 'LETTER',
+      margins: {
+        top: SPACE.top,
+        bottom: SPACE.bottom,
+        left: SPACE.left,
+        right: SPACE.right,
+      },
       info: {
         Title: `CV - ${data.nombre}`,
         Author: data.nombre,
@@ -155,102 +244,145 @@ function buildPdfCv(datos, lang, outPath) {
       },
     });
 
+    registerPdfFonts(doc);
+
     const stream = fs.createWriteStream(outPath);
     doc.pipe(stream);
 
-    doc.font('Helvetica-Bold').fontSize(18).text(data.nombre);
-    doc.font('Helvetica').fontSize(12).text(data.profesion);
-    doc.moveDown(0.5);
-    doc.fontSize(10);
-    doc.text(`${labels.email}: ${data.correo}`);
-    doc.text(`${labels.phone}: ${data.telefono}`);
-    doc.text(`${labels.linkedin}: ${data.linkedin}`);
-    doc.text(`${labels.github}: ${data.github}`);
-    doc.text(`${labels.whatsapp}: ${data.whatsapp}`);
+    // Header
+    doc.font(FONT.bold).fontSize(SIZE.name).text(String(data.nombre).toUpperCase(), {
+      width: contentWidth(doc),
+      lineGap: 0,
+    });
+    addSpace(doc, SPACE.nameToRole);
+    doc.font(FONT.bold).fontSize(SIZE.body).text(data.profesion, {
+      width: contentWidth(doc),
+      lineGap: 0,
+    });
+    addSpace(doc, SPACE.roleToContact);
 
-    writeSectionTitle(doc, labels.summary);
-    writeBody(doc, data.descripcion);
+    doc.font(FONT.italic).fontSize(SIZE.contact).text(
+      [
+        `${labels.email}: ${data.correo}`,
+        `${labels.phone}: ${data.telefono}`,
+        `${labels.linkedin}: ${data.linkedin}`,
+        `${labels.github}: ${data.github}`,
+      ].join('\n'),
+      {
+        width: contentWidth(doc),
+        lineGap: SPACE.contactLineGap,
+      }
+    );
 
+    addSpace(doc, SPACE.afterContact);
+
+    // Summary
+    writeSectionTitle(doc, labels.summary, { first: true });
+    for (const paragraph of paragraphsFrom(data.descripcion)) {
+      writeBody(doc, paragraph);
+    }
+
+    // Experience
     if (experiencia.length) {
       writeSectionTitle(doc, labels.experience);
-      for (const job of experiencia) {
-        ensureSpace(doc, 70);
-        doc.moveDown(0.3);
-        doc.font('Helvetica-Bold').fontSize(11).text(`${job.puesto} | ${job.empresa}`);
-        doc.font('Helvetica-Oblique').fontSize(9).text(`${labels.period}: ${job.fechaInicio} - ${job.fechaFin}`);
+      experiencia.forEach((job, jobIndex) => {
+        ensureSpace(doc, 90);
+        if (jobIndex > 0) addSpace(doc, SPACE.betweenJobs);
+
+        doc.font(FONT.bold).fontSize(SIZE.body).text(`${job.puesto} | ${job.empresa}`, {
+          width: contentWidth(doc),
+          lineGap: 0,
+        });
+        addSpace(doc, SPACE.jobToDates);
+        doc.font(FONT.boldItalic).fontSize(SIZE.body).text(`${job.fechaInicio} – ${job.fechaFin}`, {
+          width: contentWidth(doc),
+          lineGap: 0,
+        });
+
         if (Array.isArray(job.logros) && job.logros.length) {
+          addSpace(doc, SPACE.datesToBullets);
           for (const logro of job.logros) {
-            ensureSpace(doc, 36);
-            doc.font('Helvetica').fontSize(10).text(`• ${stripHtml(logro)}`, {
-              align: 'left',
-              indent: 10,
-            });
+            writeBullet(doc, logro);
           }
-        } else {
+        } else if (job.descripcion) {
+          addSpace(doc, SPACE.datesToBullets);
           writeBody(doc, job.descripcion);
+        }
+      });
+    }
+
+    // Skills
+    if (Array.isArray(data.habilidades) && data.habilidades.length) {
+      writeSectionTitle(doc, labels.skills);
+      for (const skill of data.habilidades) {
+        ensureSpace(doc, 36);
+        const items = Array.isArray(skill.items) ? skill.items.join(', ') : '';
+        const suffix = items.endsWith('.') ? '' : '.';
+        resetCursorX(doc);
+        doc.font(FONT.bold).fontSize(SIZE.body).text(`${skill.categoria}: `, doc.page.margins.left, doc.y, {
+          width: contentWidth(doc),
+          continued: true,
+          lineGap: SPACE.bodyLineGap,
+        });
+        doc.font(FONT.regular).fontSize(SIZE.body).text(`${items}${suffix}`, {
+          lineGap: SPACE.bodyLineGap,
+        });
+        resetCursorX(doc);
+      }
+    }
+
+    // Education
+    if (educacion.length) {
+      writeSectionTitle(doc, labels.education);
+      for (const edu of educacion) {
+        ensureSpace(doc, 50);
+        // Reference format: school bold, then degree/status on the next line.
+        const school = edu.institucion || edu.titulo;
+        const detail = edu.detalle || (edu.institucion ? edu.titulo : null);
+        resetCursorX(doc);
+        doc.font(FONT.bold).fontSize(SIZE.body).text(school, doc.page.margins.left, doc.y, {
+          width: contentWidth(doc),
+          lineGap: 0,
+        });
+        resetCursorX(doc);
+        if (detail && detail !== school) {
+          writeBody(doc, detail);
+        }
+        if (edu.anio) {
+          writeBody(doc, edu.anio);
         }
       }
     }
 
-    if (Array.isArray(data.habilidades) && data.habilidades.length) {
-      writeSectionTitle(doc, labels.skills);
-      for (const skill of data.habilidades) {
-        ensureSpace(doc, 28);
-        const items = Array.isArray(skill.items) ? skill.items.join(', ') : '';
-        doc.font('Helvetica-Bold').fontSize(10).text(`${skill.categoria}: `, { continued: true });
-        doc.font('Helvetica').fontSize(10).text(items);
-      }
-    }
-
-    if (educacion.length) {
-      writeSectionTitle(doc, labels.education);
-      for (const edu of educacion) {
-        ensureSpace(doc, 40);
-        doc.moveDown(0.3);
-        doc.font('Helvetica-Bold').fontSize(11).text(`${edu.titulo} | ${edu.institucion}`);
-        doc.font('Helvetica').fontSize(9).text(`${labels.period}: ${edu.anio}`);
-      }
-    }
-
+    // Certifications
     if (certificaciones.length) {
       writeSectionTitle(doc, labels.certifications);
       for (const cert of certificaciones) {
-        ensureSpace(doc, 45);
-        doc.moveDown(0.3);
-        doc.font('Helvetica-Bold').fontSize(10).text(`• ${cert.nombre}`);
-        doc.font('Helvetica').fontSize(9).text(`${labels.issuer}: ${cert.emisor}`);
-        doc.text(`${labels.credential}: ${cert.url}`);
-      }
-    }
-
-    if (proyectos.length) {
-      writeSectionTitle(doc, labels.projects);
-      for (const project of proyectos) {
         ensureSpace(doc, 55);
-        doc.moveDown(0.3);
-        doc.font('Helvetica-Bold').fontSize(10).text(`• ${project.nombre}`);
-        doc.font('Helvetica').fontSize(9).text(`${labels.url}: ${project.url}`);
-        writeBody(doc, project.descripcion);
+        const issuer = cert.emisor ? ` – ${cert.emisor}.` : '.';
+        writeBullet(doc, `${cert.nombre}${issuer}`);
+        doc.font(FONT.regular).fontSize(SIZE.body).fillColor('#000000');
+        const credX = doc.page.margins.left + SPACE.bulletTextInset;
+        const credWidth = doc.page.width - doc.page.margins.right - credX;
+        doc.text(`${labels.credential}: ${cert.url}`, credX, doc.y, {
+          width: credWidth,
+          lineGap: SPACE.bodyLineGap,
+          link: cert.url,
+          underline: false,
+        });
+        resetCursorX(doc);
       }
     }
 
+    // Languages
     if (lenguajes.length) {
-      writeSectionTitle(doc, labels.languages);
+      writeSectionTitle(doc, labels.languages, {
+        keepWith: Math.max(48, lenguajes.length * 28),
+      });
       for (const langItem of lenguajes) {
-        doc.font('Helvetica').fontSize(10).text(`• ${langItem.lenguaje}: ${langItem.nivel}`);
+        const detail = langItem.detalle ? ` – ${langItem.detalle}` : '';
+        writeBullet(doc, `${langItem.lenguaje}: ${langItem.nivel}${detail}.`);
       }
-    }
-
-    if (intereses.length) {
-      writeSectionTitle(doc, labels.interests);
-      doc
-        .font('Helvetica')
-        .fontSize(10)
-        .text(
-          intereses
-            .map((item) => `• ${typeof item === 'string' ? item : item.nombre ?? item.interes}`)
-            .join('\n')
-        );
     }
 
     doc.end();
