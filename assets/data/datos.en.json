@@ -99,12 +99,12 @@
             "fechaInicio": "July 2025",
             "fechaFin": "Present",
             "logros": [
-                "Designed and maintained the delivery platform in a high-throughput fintech environment, with thousands of changes deployed to production every day, focusing on reusable GitHub Actions, GitOps (ArgoCD/Kubernetes), and deployment process reliability.",
+                "Participated in the design and maintenance of the delivery platform in a high-throughput fintech environment, with thousands of changes deployed to production every day, focusing on reusable GitHub Actions, GitOps (ArgoCD/Kubernetes), and deployment process reliability.",
                 "Optimized shared pipelines for Java and Go applications, improving their performance and integrating Sonar, isolated testing environments with Signadot, and unit tests for the GitHub Actions themselves.",
-                "Led end-to-end two Istio routing migrations involving approximately 300 repositories, implementing a hierarchical VirtualServices model with delegation, with no service interruptions.",
+                "Applied two Istio routing migrations end-to-end across approximately 300 repositories, implementing a hierarchical VirtualServices model with delegation, with no service interruptions.",
                 "Redesigned the Canary Deployments promotion metric to evaluate canary signals instead of global production error rates, avoiding blockers when baseline services were already degraded.",
-                "Manage Datadog alerts for pipelines and Kubernetes infrastructure components using versioned configurations in Git and Terraform.",
-                "Document technical standards and procedures to facilitate troubleshooting and improve the developer experience."
+                "Managed Datadog alerts for pipelines and Kubernetes infrastructure components using versioned configurations in Git and Terraform.",
+                "Documented technical standards and procedures to facilitate troubleshooting and improve the developer experience."
             ]
         },
         {

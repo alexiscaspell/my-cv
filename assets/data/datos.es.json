@@ -97,12 +97,12 @@
             "fechaInicio": "Julio 2025",
             "fechaFin": "Actualidad",
             "logros": [
-                "Diseñé y mantuve la plataforma de delivery en un entorno fintech de alto throughput, con miles de cambios desplegados en producción cada día, enfocándome en GitHub Actions reutilizables, GitOps (ArgoCD/Kubernetes) y confiabilidad del proceso de despliegue.",
+                "Participé en el diseño y mantenimiento de la plataforma de delivery en un entorno fintech de alto throughput, con miles de cambios desplegados en producción cada día, enfocándome en GitHub Actions reutilizables, GitOps (ArgoCD/Kubernetes) y confiabilidad del proceso de despliegue.",
                 "Optimicé pipelines compartidos para aplicaciones Java y Go, mejorando su performance e integrando Sonar, entornos de testing aislados mediante Signadot y pruebas unitarias sobre las propias GitHub Actions.",
-                "Lideré de punta a punta dos migraciones de routing en Istio que involucraron aproximadamente 300 repositorios, implementando un modelo jerárquico de VirtualServices con delegación, sin interrupciones del servicio.",
+                "Apliqué de punta a punta dos migraciones de routing en Istio que involucraron aproximadamente 300 repositorios, implementando un modelo jerárquico de VirtualServices con delegación, sin interrupciones del servicio.",
                 "Rediseñé la métrica de promoción de Canary Deployments para evaluar las señales del canary en lugar del error global de producción, evitando bloqueos cuando los servicios base ya presentaban degradación.",
-                "Gestiono alertas de Datadog para pipelines y componentes de infraestructura Kubernetes, utilizando configuraciones versionadas en Git y Terraform.",
-                "Documento estándares y procedimientos técnicos para facilitar la resolución de problemas y mejorar la experiencia de los equipos de desarrollo."
+                "Gestioné alertas de Datadog para pipelines y componentes de infraestructura Kubernetes, utilizando configuraciones versionadas en Git y Terraform.",
+                "Documenté estándares y procedimientos técnicos para facilitar la resolución de problemas y mejorar la experiencia de los equipos de desarrollo."
             ]
         },
         {
